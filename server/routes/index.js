@@ -1,5 +1,7 @@
 export { default as home } from './homeRouter'
+export { default as registerAdmin } from './adminRouter'
 export { default as registerSeller } from './registerSellerRouter'
 export { default as registerCustomer } from './registerCustomerRouter'
 export { default as login } from './loginRouter'
+export { default as logout } from './logoutRouter'
 export { default as products } from './productsRouter'

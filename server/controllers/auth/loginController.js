@@ -26,13 +26,12 @@ const login = async (req, res, next) => {
       next();
     } else if (customer.includes(uid)) {
       res.status(200).json(customerArray);
-      next()
+      next();
     }
   } catch (err) {
     res.status(500).json({
       msg: err.message,
     });
-    next()
   }
 };
 export default login;

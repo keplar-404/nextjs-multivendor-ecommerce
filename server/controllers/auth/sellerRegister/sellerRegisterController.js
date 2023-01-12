@@ -6,12 +6,16 @@ const registerSeller = async (req, res, next) => {
   const { email, password, username, shopname } = req.body;
   const trimedUserName = String(username.trim()) ;
   const trimedShopName =String(shopname.trim()) ;
+  const trimedEmail = email.trim();
 
   const exitsUserNameArray = await SellerModel.find({
     username: trimedUserName
   }).select(
     "-_id -email -__v -uid -role -shopname -totalearning -products -productpending -productdeliverd -delivertoadmin"
   );
+  const exitsEmailArray = await SellerModel.find({
+    email: trimedEmail,
+  }).select("-_id -username -shopname -__v -uid -role -totalearning -products -productpending -productdeliverd -delivertoadmin");
   const exitsShopArray = await SellerModel.find({
     shopname: trimedShopName
   }).select(
@@ -20,6 +24,7 @@ const registerSeller = async (req, res, next) => {
 
   // if i do not convert this exitsUserNameArray, exitsShopArray to string an error will appear
   const exitsUserNameString = exitsUserNameArray.toString();
+  const exitsEmailString = exitsEmailArray.toString();
   const exitsShopString = exitsShopArray.toString();
 //   console.log(typeof exitsUserNameString);
 //   console.log(exitsUserNameString);
@@ -36,6 +41,12 @@ const registerSeller = async (req, res, next) => {
     res.status(200).json({
       message: "Shop name has already taken",
       data: exitsShopString,
+    });
+    return;
+  }
+   if (exitsEmailString.includes(trimedEmail)) {
+    res.status(200).json({
+      message: "Email has already taken",
     });
     return;
   }

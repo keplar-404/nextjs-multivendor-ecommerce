@@ -10,14 +10,17 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
+    "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
     "firebase": "^9.15.0",
     "flowbite": "^1.5.5",
     "flowbite-react": "^0.3.7",
     "next": "13.1.1",
+    "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-progressbar": "^15.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

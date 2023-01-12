@@ -1,19 +1,34 @@
-import { Label, TextInput, Checkbox, Button } from "flowbite-react";
+import { Label, TextInput, Button } from "flowbite-react";
 import { useRef, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
+// Global variable
+let exitsUsername = "";
+let exitsEmail = "";
+let exitsShopName = ''
+
+// main function
 function Seller() {
+  //ref hooks
   const email = useRef("");
   const username = useRef("");
   const shopname = useRef("");
   const password = useRef("");
   const rePassword = useRef("");
 
+  //useStatehooks
   const [e, setE] = useState("");
   const [u, setU] = useState("");
   const [S, setS] = useState("");
   const [p, setP] = useState("");
   const [r, setR] = useState("");
+  const [exitsusername, setexitsusername] = useState("");
+  const [exitsemail, setexitsemail] = useState("");
+  const [exitsshopname, setexitsshopname] = useState("")
+  const router = useRouter();
 
+  //handle submit function
   const handleSubmit = (e) => {
     e.preventDefault();
     const Email = email.current.value;
@@ -22,11 +37,6 @@ function Seller() {
     const Password = password.current.value;
     const RePassword = rePassword.current.value;
 
-    // console.log( typeof(Email), Email, "email" );
-    // console.log( typeof(Username), Username );
-    // console.log( typeof(Shopname), Shopname );
-    // console.log( typeof(Password), Password );
-    // console.log( typeof(RePassword), RePassword );
 
     // You can validate data as your wish
     // 1. email validation
@@ -60,10 +70,45 @@ function Seller() {
       setR("");
     }
 
+    // creating seller account
+    axios.post('http://127.0.0.1:5000/registerseller', {
+      email: Email,
+      password: Password,
+      username: Username,
+      shopname: Shopname
+    }).then((res) => {
+      console.log(res.data)
+      if (res.data.message === "Seller created successfully") {
+        router.push("/login");
+      } else {
+        if (res.data.message === "User name has already taken") {
+          exitsUsername = res.data.message;
+          setexitsusername("exitsusername");
+        } else {
+          exitsUsername = "";
+          setexitsusername("");
+        }
+        if (res.data.message === "Email has already taken") {
+          exitsEmail = res.data.message;
+          setexitsemail("exitsemail");
+        } else {
+          exitsEmail = "";
+          setexitsemail("");
+        }
+        if(res.data.message === "Shop name has already taken") {
+          exitsShopName = res.data.message
+          setexitsshopname('exitsshopname')
+        } else {
+          exitsShopName = ''
+          setexitsshopname("")
+
+        }
+      }
+    }).catch((err) => console.log(err))
   };
   return (
     <>
-      <form className="flex flex-col gap-4 w-96" s>
+      <form className="flex flex-col gap-4 w-96" >
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email" value="Your email" />
@@ -114,7 +159,7 @@ function Seller() {
             shadow={true}
             ref={shopname}
           />
-          {s === "s" ? (
+          {S === "s" ? (
             <p className="text-sm text-red-700">Please input your shop name</p>
           ) : (
             ""
@@ -161,6 +206,23 @@ function Seller() {
         <Button type="submit" onClick={handleSubmit}>
           Register new account
         </Button>
+        {exitsusername === "exitsusername" ? (
+          <p className="text-sm text-red-700">{exitsUsername}</p>
+        ) : (
+          ""
+        )}
+        {exitsemail === "exitsemail" ? (
+          <p className="text-sm text-red-700">{exitsEmail}</p>
+        ) : (
+          ""
+        )}
+        {
+          exitsshopname === 'exitsshopname' ? (
+            <p className="text-sm text-red-700">{exitsShopName}</p>
+          ) : (
+            ""
+          )
+        }
       </form>
     </>
   );

@@ -38,7 +38,7 @@ function Login() {
   };
   return (
     <>
-      <form className="flex flex-col gap-4 w-96" s>
+      <form className="flex flex-col gap-4 w-96">
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email" value="Your email" />
