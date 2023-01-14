@@ -20,7 +20,7 @@ function Left({ handler }) {
           className="group transition duration-600 opacity-50 hover:opacity-100"
         >
           Dashboard
-          <p class="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
 
         <button
@@ -28,21 +28,21 @@ function Left({ handler }) {
           className="group transition duration-600 opacity-50 hover:opacity-100"
         >
           Products
-          <p class="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("AddProduct")}
           className="group transition duration-600 opacity-50 hover:opacity-100"
         >
           Add Product
-          <p class="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("DeleteProduct")}
           className="group transition duration-600 opacity-50 hover:opacity-100"
         >
           Delete Product
-          <p class="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button>Logout</button>
       </div>

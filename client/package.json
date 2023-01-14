@@ -12,6 +12,7 @@
     "@next/font": "13.1.1",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
+    "dotenv": "^16.0.3",
     "firebase": "^9.15.0",
     "flowbite": "^1.5.5",
     "flowbite-react": "^0.3.7",
@@ -20,6 +21,7 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "18.2.0",
+    "react-loader-spinner": "^5.3.4",
     "react-progressbar": "^15.4.1"
   },
   "devDependencies": {

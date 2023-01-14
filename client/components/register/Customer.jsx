@@ -2,6 +2,7 @@ import { Label, TextInput, Button } from "flowbite-react";
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { Triangle } from "react-loader-spinner";
 
 // Global variable
 let exitsUsername = "";
@@ -14,6 +15,8 @@ function Customer() {
   const username = useRef("");
   const password = useRef("");
   const rePassword = useRef("");
+  // router state for redirection to another page
+  const router = useRouter();
 
   //useStatehooks
   const [e, setE] = useState("");
@@ -22,51 +25,58 @@ function Customer() {
   const [r, setR] = useState("");
   const [exitsusername, setexitsusername] = useState("");
   const [exitsemail, setexitsemail] = useState("");
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   //handle submit function
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+
+    // Setting exitsemail exitsusername value when anytime this function is calling
+    setexitsemail("");
+    setexitsusername("");
+
+    //getting value of form information
     const Email = email.current.value;
     const Username = username.current.value;
     const Password = password.current.value;
     const RePassword = rePassword.current.value;
 
+    // validation
     // You can validate data as your wish
-
     // 1. email validation
     if (Email === "" || !Email.includes("@")) {
+      //displaying error message in the bottom
       setE("e");
-
       return;
     } else {
       setE("");
     }
     // 2. usename validation
     if (Username === "") {
+      //displaying error message in the bottom
       setU("u");
-
       return;
     } else {
       setU("");
     }
     // 3. password validation
     if (Password === "" || Password.length < 8) {
+      //displaying error message in the bottom
       setP("p");
-
       return;
     } else {
       setP("");
     }
     // 4. repete password validation
     if (RePassword !== Password) {
+      //displaying error message in the bottom
       setR("r");
-
       return;
     } else {
       setR("");
     }
+
+    setLoading(true);
 
     //creating customer account
     axios
@@ -78,11 +88,12 @@ function Customer() {
       .then((res) => {
         console.log(res.data);
         if (res.data.message === "user created successfully") {
-          router.push('/login');
+          router.push("/login");
         } else {
           if (res.data.message === "User name has already taken") {
             exitsUsername = res.data.message;
             setexitsusername("exitsusername");
+            setLoading(false);
           } else {
             exitsUsername = "";
             setexitsusername("");
@@ -90,6 +101,7 @@ function Customer() {
           if (res.data.message === "Email has already taken") {
             exitsEmail = res.data.message;
             setexitsemail("exitsemail");
+            setLoading(false);
           } else {
             exitsEmail = "";
             setexitsemail("");
@@ -100,7 +112,7 @@ function Customer() {
   };
   return (
     <>
-      <form className="flex flex-col gap-4 w-96" onSubmit={handleSubmit} >
+      <form className="flex flex-col gap-4 w-96" onSubmit={handleSubmit}>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email" value="Your email" />
@@ -177,8 +189,20 @@ function Customer() {
             ""
           )}
         </div>
-        <Button type="submit">
-          Register new account
+        <Button type="submit" disabled={loading ? true : false}>
+          {loading === true ? (
+            <Triangle
+              height="21"
+              width="21"
+              color="white"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            <p>Register new account</p>
+          )}
         </Button>
         {exitsusername === "exitsusername" ? (
           <p className="text-sm text-red-700">{exitsUsername}</p>

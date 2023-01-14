@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import { createContext, useEffect, useState } from "react";
 import { checkUser } from "../firebase/Authentication";
-import NextNProgress from 'nextjs-progressbar';
+import NextNProgress from "nextjs-progressbar";
 
 export const UserContext = createContext();
 
@@ -15,11 +15,12 @@ export default function App({ Component, pageProps }) {
       checkUser(setLoggedinUser);
     }
   }, [loggedinUser]);
-  return (<>
-    <UserContext.Provider value={{ loggedinUser, setLoggedinUser }}>
-    <NextNProgress />
-      <Component {...pageProps} />
-    </UserContext.Provider>
-  </>
+  return (
+    <>
+      <UserContext.Provider value={{ loggedinUser, setLoggedinUser }}>
+        <NextNProgress />
+        <Component {...pageProps} />
+      </UserContext.Provider>
+    </>
   );
 }

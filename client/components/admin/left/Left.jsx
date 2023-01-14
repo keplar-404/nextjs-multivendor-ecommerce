@@ -13,7 +13,7 @@ function Left({ handler }) {
           height={50}
           alt="image description"
         />
-        <p>seller</p>
+        <p>Admin</p>
 
         <button
           onClick={() => handler("Dashboard")}

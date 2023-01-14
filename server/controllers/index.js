@@ -10,6 +10,7 @@ import sellerProducts from './products/getSellerProducts'
 import findSellerProduct from "./products/findSellerProduct"
 import deleteSellerProduct from "./products/deleteSellerProduct"
 import deleteProduct from "./products/deleteProduct"
+import getUserController from "./auth/getUserController"
 
 
 
@@ -26,7 +27,8 @@ const allControllers = {
     sellerProducts,
     findSellerProduct,
     deleteSellerProduct,
-    deleteProduct
+    deleteProduct,
+    getUserController
 }
 
 

@@ -2,11 +2,12 @@ import { Label, TextInput, Button } from "flowbite-react";
 import { useRef, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { Triangle } from "react-loader-spinner";
 
 // Global variable
 let exitsUsername = "";
 let exitsEmail = "";
-let exitsShopName = ''
+let exitsShopName = "";
 
 // main function
 function Seller() {
@@ -25,19 +26,27 @@ function Seller() {
   const [r, setR] = useState("");
   const [exitsusername, setexitsusername] = useState("");
   const [exitsemail, setexitsemail] = useState("");
-  const [exitsshopname, setexitsshopname] = useState("")
-  const router = useRouter();
+  const [exitsshopname, setexitsshopname] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
   //handle submit function
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Setting exitsemail exitsusername value when anytime this function is calling
+    setexitsemail("");
+    setexitsusername("");
+    setexitsshopname("");
+
+    //getting value of form information
     const Email = email.current.value;
     const Username = username.current.value;
     const Shopname = shopname.current.value;
     const Password = password.current.value;
     const RePassword = rePassword.current.value;
 
-
+    // validation
     // You can validate data as your wish
     // 1. email validation
     if (Email === "" || !Email.includes("@")) {
@@ -70,45 +79,52 @@ function Seller() {
       setR("");
     }
 
-    // creating seller account
-    axios.post('http://127.0.0.1:5000/registerseller', {
-      email: Email,
-      password: Password,
-      username: Username,
-      shopname: Shopname
-    }).then((res) => {
-      console.log(res.data)
-      if (res.data.message === "Seller created successfully") {
-        router.push("/login");
-      } else {
-        if (res.data.message === "User name has already taken") {
-          exitsUsername = res.data.message;
-          setexitsusername("exitsusername");
-        } else {
-          exitsUsername = "";
-          setexitsusername("");
-        }
-        if (res.data.message === "Email has already taken") {
-          exitsEmail = res.data.message;
-          setexitsemail("exitsemail");
-        } else {
-          exitsEmail = "";
-          setexitsemail("");
-        }
-        if(res.data.message === "Shop name has already taken") {
-          exitsShopName = res.data.message
-          setexitsshopname('exitsshopname')
-        } else {
-          exitsShopName = ''
-          setexitsshopname("")
+    setLoading(true);
 
+    // creating seller account
+    axios
+      .post("http://127.0.0.1:5000/registerseller", {
+        email: Email,
+        password: Password,
+        username: Username,
+        shopname: Shopname,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message === "Seller created successfully") {
+          router.push("/login");
+        } else {
+          if (res.data.message === "User name has already taken") {
+            exitsUsername = res.data.message;
+            setexitsusername("exitsusername");
+            setLoading(false);
+          } else {
+            exitsUsername = "";
+            setexitsusername("");
+          }
+          if (res.data.message === "Email has already taken") {
+            exitsEmail = res.data.message;
+            setexitsemail("exitsemail");
+            setLoading(false);
+          } else {
+            exitsEmail = "";
+            setexitsemail("");
+          }
+          if (res.data.message === "Shop name has already taken") {
+            exitsShopName = res.data.message;
+            setexitsshopname("exitsshopname");
+            setLoading(false);
+          } else {
+            exitsShopName = "";
+            setexitsshopname("");
+          }
         }
-      }
-    }).catch((err) => console.log(err))
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <>
-      <form className="flex flex-col gap-4 w-96" >
+      <form className="flex flex-col gap-4 w-96" onSubmit={handleSubmit}>
         <div>
           <div className="mb-2 block">
             <Label htmlFor="email" value="Your email" />
@@ -203,8 +219,20 @@ function Seller() {
             ""
           )}
         </div>
-        <Button type="submit" onClick={handleSubmit}>
-          Register new account
+        <Button type="submit"  disabled={loading ? true : false}>
+        {loading === true ? (
+            <Triangle
+              height="21"
+              width="21"
+              color="white"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            <p>Register new account</p>
+          )}
         </Button>
         {exitsusername === "exitsusername" ? (
           <p className="text-sm text-red-700">{exitsUsername}</p>
@@ -216,13 +244,11 @@ function Seller() {
         ) : (
           ""
         )}
-        {
-          exitsshopname === 'exitsshopname' ? (
-            <p className="text-sm text-red-700">{exitsShopName}</p>
-          ) : (
-            ""
-          )
-        }
+        {exitsshopname === "exitsshopname" ? (
+          <p className="text-sm text-red-700">{exitsShopName}</p>
+        ) : (
+          ""
+        )}
       </form>
     </>
   );
