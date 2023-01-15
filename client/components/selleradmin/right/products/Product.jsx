@@ -1,17 +1,22 @@
 import Image from "next/image";
-import pr from "../../../../public/img/pr.png"
-function Product() {
+import pr from "../../../../public/img/pr.png";
+function Product(props) {
+  const { images, name, stock, sold, price, rating } = props.value;
   return (
     <>
-      
-        <Image src={pr} width={50} height={50} alt="hi" className="w-10 mx-auto"/>
-        <p className="mt-3">2</p>
-        <p className="mt-3">2</p>
-        <p className="mt-3">2</p>
-        <p className="mt-3">2</p>
-        <p className="mt-3">2</p>
-        <p className="mt-3">2</p>
-
+      <Image
+        src={pr}
+        width={50}
+        height={50}
+        alt="hi"
+        className="w-10 mx-auto"
+      />
+      <p className="mt-3">{name}</p>
+      <p className="mt-3">{stock}</p>
+      <p className="mt-3">{sold}</p>
+      <p className="mt-3">{price}</p>
+      <p className="mt-3">{rating}</p>
+      <p className="mt-3 cursor-pointer">Details</p>
     </>
   );
 }

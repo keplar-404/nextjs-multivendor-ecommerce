@@ -6,7 +6,7 @@ function Products(props) {
   const totalProduct = products.length
   return (
     <>
-      <div className="w-11/12 pt-7 h-screen">
+      <div className="w-11/12 pt-7 h-fit">
         <div>
           <p className="text-2xl">All products</p>
         </div>
@@ -26,13 +26,15 @@ function Products(props) {
         </div>
         <div className="rounded-xl mt-7 bg-white grid grid-cols-7 text-center pt-4 pb-4">
             <p></p>
-            <p>Product</p>
+            <p>Name</p>
             <p>Instock</p>
             <p>Sold</p>
             <p>Price</p>
             <p>Rating</p>
-            <p>Order</p>
-        <Product/>
+            <p></p>
+            {products.map((currendata)=>  <Product key={currendata} value={currendata} />)}
+          
+       
         </div>
       </div>
     </>

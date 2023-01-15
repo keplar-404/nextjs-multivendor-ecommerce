@@ -2,7 +2,7 @@ import express from "express"
 import allControllers from "../controllers"
 
 const router = express.Router()
-const { addproduct, allProducts, sellerProducts, findSellerProduct, deleteSellerProduct, deleteProduct } = allControllers
+const { addproduct, allProducts, sellerProducts, findSellerProduct, deleteSellerProduct, deleteProduct, addcategory, getCategory } = allControllers
 
 
 //all router operation
@@ -16,6 +16,10 @@ router.post('/deleteproduct', deleteProduct)
 router.post('/sellerproducts', sellerProducts)
 router.post('/findsellerproduct', findSellerProduct)
 router.post('/deletesellerproduct', deleteSellerProduct)
+
+// catagorie router
+router.post('/addcategory', addcategory)
+router.get('/getcategory', getCategory)
 
 
 

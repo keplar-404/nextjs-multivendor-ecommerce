@@ -34,7 +34,7 @@ function Left({ handler }) {
           onClick={() => handler("AddProduct")}
           className="group transition duration-600 opacity-50 hover:opacity-100"
         >
-          Add Product
+          Add or update Product
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
