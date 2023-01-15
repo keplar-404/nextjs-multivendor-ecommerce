@@ -23,10 +23,10 @@ const login = async (req, res, next) => {
 
     if (seller.includes(uid)) {
       res.status(200).json(sellerArray);
-      next();
+      // next();
     } else if (customer.includes(uid)) {
       res.status(200).json(customerArray);
-      next();
+      // next();
     }
   } catch (err) {
     res.status(500).json({

@@ -4,7 +4,7 @@ function Product() {
   return (
     <>
       
-        <Image src={pr} width={50} height={50} className="w-10 mx-auto"/>
+        <Image src={pr} width={50} height={50} alt="hi" className="w-10 mx-auto"/>
         <p className="mt-3">2</p>
         <p className="mt-3">2</p>
         <p className="mt-3">2</p>

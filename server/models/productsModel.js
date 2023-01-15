@@ -36,10 +36,6 @@ const productsSchema = mongoose.Schema({
   category: {
     type: String,
   },
-  delevertoadmin:{
-    type:Boolean,
-    default: false
-  },
   shopname:{
     type:String
   }

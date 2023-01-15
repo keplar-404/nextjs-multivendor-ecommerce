@@ -6,22 +6,20 @@ import DeleteProduct from "../components/selleradmin/right/DeleteProduct";
 import Products from "../components/selleradmin/right/products/AllProducts";
 import axios from "axios";
 
-
 function SellerAdmin() {
   const [currentComponent, setCurrentComponent] = useState("Dashboard");
-  // const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
-  const getUser = (UID) => {
-    console.log("working1")
+  const getUser = (uid) => {
+    const UID = uid.replace(/"/g, "");
     axios
-    .post("http://127.0.0.1:5000/getuser", {
-      uid: UID,
-    })
-    .then((u) => {
-      // setUser(u)
-        console.log(u)
+      .post("http://127.0.0.1:5000/getuser", {
+        uid: UID,
+      })
+      .then((u) => {
+        setUser(u.data[0]);
+        // console.log(u);
       });
-      console.log("working2")
   };
   useEffect(() => {
     try {
@@ -36,21 +34,26 @@ function SellerAdmin() {
   const handleState = (value) => {
     setCurrentComponent(value);
   };
-  return (
-    <>
-      <div className=" bg-slate-400 flex">
-        <div className="w-1/4 h-full">
-          <Left handler={handleState} />
+
+  if (user === null) {
+    return <p>Loading</p>;
+  } else if (user) {
+    return (
+      <>
+        <div className=" bg-slate-400 flex">
+          <div className="w-1/4 h-full">
+            <Left handler={handleState} />
+          </div>
+          <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl h-fit flex justify-center">
+            {currentComponent === "Dashboard" && <Dashboard value={user} />}
+            {currentComponent === "Products" && <Products value={user} />}
+            {currentComponent === "AddProduct" && <AddProduct />}
+            {currentComponent === "DeleteProduct" && <DeleteProduct />}
+          </div>
         </div>
-        <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl h-fit flex justify-center">
-          {currentComponent === "Dashboard" && <Dashboard />}
-          {currentComponent === "Products" && <Products />}
-          {currentComponent === "AddProduct" && <AddProduct />}
-          {currentComponent === "DeleteProduct" && <DeleteProduct />}
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 export default SellerAdmin;

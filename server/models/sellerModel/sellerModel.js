@@ -9,36 +9,44 @@ const sellerSchema = mongoose.Schema({
   },
   shopname: {
     type: String,
-    required: true
+    required: true,
   },
-  logo:{
-    type: String
+  logo: {
+    type: String,
   },
   uid: String,
   role: {
     type: String,
-    default:"seller"
+    default: "seller",
   },
   totalearning: {
     type: Number,
-    default: 0
+    default: 0,
   },
   products: {
     type: Array,
-    default: []
+    default: [],
   },
   productpending: {
     type: Number,
-    default: 0
+    default: 0,
   },
   productdeliverd: {
     type: Number,
-    default: 0
+    default: 0,
   },
   delivertoadmin: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
+  order: {
+    type: Array,
+    default: [],
+  },
+  ordercencle: {
+    type: Array,
+    default: [],
+  },
 });
 
 const SellerModel = mongoose.model("Seller", sellerSchema);

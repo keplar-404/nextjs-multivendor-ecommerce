@@ -18,5 +18,5 @@ app.use('/products', products)
 app.use('/getuser', getuser)
 
 // middleware
-app.use(checkCurrentUser)
+// app.use(checkCurrentUser)
 export default app
