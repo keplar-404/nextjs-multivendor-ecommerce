@@ -4,7 +4,6 @@ import { auth } from "../firebase/Authentication";
 import { Triangle } from "react-loader-spinner";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
-import axios from "axios";
 
 function Login() {
   const email = useRef("");
@@ -45,7 +44,11 @@ function Login() {
 
     signInWithEmailAndPassword(auth, Email, Password)
       .then((userCrediential) => {
-        router.back();
+        localStorage.setItem(
+          "accesstoken",
+          JSON.stringify(userCrediential.user.uid)
+        );
+        location.reload();
       })
       .catch((err) => {
         const error = err.message;

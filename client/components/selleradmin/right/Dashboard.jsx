@@ -1,6 +1,4 @@
 function Dashboard(props) {
-  // const { totalearning } = props
-  // console.log(props)
   return (
     <>
       <div className="w-11/12 pt-6 h-screen">
