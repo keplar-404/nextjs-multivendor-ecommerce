@@ -18,30 +18,31 @@ function DeleteProduct({ value }) {
         uid: value.uid,
       })
       .then((data) => {
+        // console.log(data.data.message)
+        if(data.data.message === "Product not found"){
+          setUnsuccess(true)
+          setsuccessfull(false)
+          return
+        }
         setProduct(data.data.data);
+        setUnsuccess(false)
       });
-    name.current.value = "";
-  };
-
-  const deleteProduct = (e) => {
+    };
+    
+    const deleteProduct = (e) => {
     e.preventDefault();
     const Name = name.current.value.toString();
     axios
-      .put("http://127.0.0.1:5000/products/deletesellerproduct", {
-        Name: Name,
+    .put("http://127.0.0.1:5000/products/deletesellerproduct", {
         uid: value.uid,
+        Name: Name,
       })
       .then((data) => {
-        if (data.data.message === "Products not found") {
-          setUnsuccess(true);
-          setsuccessfull(false);
-        }
+        console.log(data.data)
+        setsuccessfull(true)
+        name.current.value = "";
       });
-    if (data.data.message === "Product deleted successfully") {
-      setsuccessfull(true);
-      setUnsuccess(false);
-    }
-  };
+    };
   return (
     <>
       <div className="h-fill">
@@ -88,7 +89,7 @@ function DeleteProduct({ value }) {
           </div>
         )}
         {successfull ? <p>Product delete successfully</p> : ""}
-        {unsuccess ? <p>Product not found</p> : ""}
+        {unsuccess ? <p className="text-red-600 text-xl text-center">Product not found</p> : ""}
       </div>
     </>
   );

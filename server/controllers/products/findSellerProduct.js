@@ -11,7 +11,7 @@ const findSellerProduct = async (req, res, next) => {
     const Products = seller[0].products;
     const Product = Products.find((data) => data.name === name);
     if (!Product) {
-      res.status(400).json({
+      res.status(200).json({
         message: "Product not found",
       });
       return;

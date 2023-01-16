@@ -166,7 +166,7 @@ function AddProduct({ value, UID }) {
         </Button>
         <br />
         {successfullCreate === true ? (
-          <p className="text-sm text-green-400 mb-2">
+          <p className="text-xl  text-green-400 mb-10">
             Product added successfully refresh the page
           </p>
         ) : (
