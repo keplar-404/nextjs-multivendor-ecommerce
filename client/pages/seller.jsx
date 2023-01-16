@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Left from "../components/selleradmin/left/Left";
 import AddOrUpdateProduct from "../components/selleradmin/right/products/AddProduct";
 import Dashboard from "../components/selleradmin/right/Dashboard";
-import DeleteProduct from "../components/selleradmin/right/DeleteProduct";
+import DeleteProduct from "../components/selleradmin/right/products/DeleteProduct";
 import Products from "../components/selleradmin/right/products/AllProducts";
+import Order from "../components/selleradmin/right/Order";
 import axios from "axios";
 
 function SellerAdmin() {
@@ -56,6 +57,7 @@ function SellerAdmin() {
               />
             )}
             {currentComponent === "DeleteProduct" && <DeleteProduct value={user} />}
+            {currentComponent === "Order" && <Order />}
           </div>
         </div>
       </>

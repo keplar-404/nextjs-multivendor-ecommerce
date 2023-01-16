@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import CategoryOption from "./CategoryOption";
-import { Triangle } from "react-loader-spinner";
 import { Button } from "flowbite-react";
 
 function AddProduct({ value, UID }) {

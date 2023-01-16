@@ -1,5 +1,5 @@
 import Image from "next/image";
-import pr from "../../../public/img/pr.png";
+import pr from "../../../../public/img/pr.png";
 import { useRef, useState } from "react";
 import axios from "axios";
 
