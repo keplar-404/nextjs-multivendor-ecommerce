@@ -15,7 +15,7 @@ router.post('/deleteproduct', deleteProduct)
 // seller router
 router.post('/sellerproducts', sellerProducts)
 router.post('/findsellerproduct', findSellerProduct)
-router.post('/deletesellerproduct', deleteSellerProduct)
+router.put('/deletesellerproduct', deleteSellerProduct)
 
 // catagorie router
 router.post('/addcategory', addcategory)

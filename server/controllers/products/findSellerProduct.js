@@ -1,21 +1,23 @@
-import Products from "../../models/productsModel";
+import SellerModel from "../../models/sellerModel/sellerModel";
 
 const findSellerProduct = async (req, res, next) => {
-  const { name, shopname } = req.body;
+  const { name, uid } = req.body;
   const trimedName = name.trim();
-  const trimedShopname = shopname.trim();
   const Name = String(trimedName);
-  const Shopname = String(trimedShopname);
   try {
-    const Product = await Products.find({ name: Name, shopname: Shopname });
-    const productString = Product.toString();
-    if (productString.includes(Name)) {
+    const seller = await SellerModel.find({ uid: uid }).select(
+      "-_id -role -totalearning -productpending -productdeliverd -delivertoadmin -order -ordercencle -username -email -uid  -__v -shopname"
+    );
+    const Products = seller[0].products;
+    const Product = Products.find((data) => data.name === name);
+    if (!Product) {
+      res.status(400).json({
+        message: "Product not found",
+      });
+      return;
+    } else {
       res.status(200).json({
         data: Product,
-      });
-    } else if (!productString.includes(Name)) {
-      res.status(200).json({
-        message: "There is no product",
       });
     }
   } catch (err) {

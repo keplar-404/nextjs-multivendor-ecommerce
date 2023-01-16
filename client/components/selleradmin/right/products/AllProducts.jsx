@@ -32,7 +32,7 @@ function Products(props) {
             <p>Price</p>
             <p>Rating</p>
             <p></p>
-            {products.map((currendata)=>  <Product key={currendata.name} value={currendata} />)}
+            {products.map((currendata)=>  <Product key={currendata._id} value={currendata} />)}
           
        
         </div>

@@ -8,7 +8,6 @@ function AddProduct({ value, UID }) {
   const [ctg, setCtg] = useState([]);
   const [successfullCreate, setSuccessfullCreate] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [updateSuccessfully, setUpdateSuccessfully] = useState(false);
 
   // getting the all category
   useEffect(() => {
@@ -31,16 +30,15 @@ function AddProduct({ value, UID }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     // getting value from form
-    let Name = name.current.value;
-    
-    let Description = description.current.value;
-    let Price = price.current.value;
+    let Name = name.current.value.toString();
+    let Description = description.current.value.toString();
+    let Price = price.current.value.toString();
     let Stock = stock.current.value;
-    let Category = category.current.value;
-    let Img1 = img1.current.value;
-    let Img2 = img2.current.value;
-    let Img3 = img3.current.value;
-    let Img4 = img4.current.value;
+    let Category = category.current.value.toString();
+    let Img1 = img1.current.value.toString();
+    let Img2 = img2.current.value.toString();
+    let Img3 = img3.current.value.toString();
+    let Img4 = img4.current.value.toString();
     let Img = [Img1, Img2, Img3, Img4];
 
     // seller shop name
@@ -63,22 +61,17 @@ function AddProduct({ value, UID }) {
         if (res.data.message === "Product created successfully") {
           setLoading(false);
           setSuccessfullCreate(true);
-          setUpdateSuccessfully(false);
-        } else if (res.data.message === "Product update successfully") {
-          setLoading(false);
-          setUpdateSuccessfully(true);
-          setSuccessfullCreate(false);
         }
       });
-    // name.current.value = "";
-    // description.current.value = "";
-    // price.current.value = "";
-    // stock.current.value = "";
-    // category.current.value = "";
-    // img1.current.value = "";
-    // img2.current.value = "";
-    // img3.current.value = "";
-    // img4.current.value = "";
+    name.current.value = "";
+    description.current.value = "";
+    price.current.value = "";
+    stock.current.value = "";
+    category.current.value = "";
+    img1.current.value = "";
+    img2.current.value = "";
+    img3.current.value = "";
+    img4.current.value = "";
   };
 
   return (
@@ -175,13 +168,6 @@ function AddProduct({ value, UID }) {
         {successfullCreate === true ? (
           <p className="text-sm text-green-400 mb-2">
             Product added successfully refresh the page
-          </p>
-        ) : (
-          ""
-        )}
-        {updateSuccessfully === true ? (
-          <p className="text-sm text-green-400 mb-4">
-            Product update successfully refresh the page
           </p>
         ) : (
           ""

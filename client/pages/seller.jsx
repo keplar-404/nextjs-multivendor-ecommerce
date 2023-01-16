@@ -38,7 +38,7 @@ function SellerAdmin() {
   };
 
   if (user === null) {
-    return <p>Loading</p>;
+    return <p className="flex justify-center items-center h-screen w-screen text-3xl">Loading</p>;
   } else if (user) {
     return (
       <>
@@ -55,7 +55,7 @@ function SellerAdmin() {
                 UID={_uid === null ? "" : _uid}
               />
             )}
-            {currentComponent === "DeleteProduct" && <DeleteProduct />}
+            {currentComponent === "DeleteProduct" && <DeleteProduct value={user} />}
           </div>
         </div>
       </>

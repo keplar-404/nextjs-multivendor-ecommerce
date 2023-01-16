@@ -1,24 +1,36 @@
-import Products from "../../models/productsModel";
+import SellerModel from "../../models/sellerModel/sellerModel";
 
 const deleteSellerProduct = async (req, res, next) => {
-  const { name, shopname } = req.body;
-  const trimedName = name.trim();
-  const trimedShopname = shopname.trim();
-  const Name = String(trimedName);
-  const Shopname = String(trimedShopname);
+  const { uid, Name } = req.body;
+
   try {
-    const deletedProduct = await Products.findOneAndDelete({
-      name: Name,
-      shopname: Shopname,
-    });
-    if (deletedProduct == null) {
+    const seller = await SellerModel.find({ uid: uid }).select(
+      "-_id -role -totalearning -productpending -productdeliverd -delivertoadmin -order -ordercencle -username -email -uid  -__v -shopname"
+    );
+    const Products = seller[0].products;
+    if (Products.find((data) => data.name !== Name)) {
       res.status(400).json({
-        message: "Product not found",
+        message: "Products not found",
       });
       return;
     }
+    if (!seller) {
+      res.status(400).json({
+        message: "user not found",
+      });
+      return;
+    }
+
+    const filtered = Products.filter((data) => data.name !== Name);
+
+    const result = await SellerModel.findOneAndUpdate(
+      { uid: uid },
+      { $set: { products: filtered } },
+      { new: true }
+    );
+
     res.status(200).json({
-      msg: "Product deleted successfully",
+      message: "Product deleted successfully"
     });
   } catch (err) {
     res.status(500).json({
