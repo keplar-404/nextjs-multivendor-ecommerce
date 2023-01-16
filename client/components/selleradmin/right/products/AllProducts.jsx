@@ -1,7 +1,7 @@
 import Product from "./Product";
 
 function Products(props) {
-  console.log(props.value)
+  // console.log(props.value)
   const { products, productpending, productdeliverd } = props.value
   const totalProduct = products.length
   return (
@@ -32,7 +32,7 @@ function Products(props) {
             <p>Price</p>
             <p>Rating</p>
             <p></p>
-            {products.map((currendata)=>  <Product key={currendata} value={currendata} />)}
+            {products.map((currendata)=>  <Product key={currendata.name} value={currendata} />)}
           
        
         </div>

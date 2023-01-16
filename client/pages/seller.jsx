@@ -50,7 +50,10 @@ function SellerAdmin() {
             {currentComponent === "Dashboard" && <Dashboard value={user} />}
             {currentComponent === "Products" && <Products value={user} />}
             {currentComponent === "AddProduct" && (
-              <AddOrUpdateProduct value={user.shopname} UID={_uid===null?"":_uid} />
+              <AddOrUpdateProduct
+                value={user.shopname}
+                UID={_uid === null ? "" : _uid}
+              />
             )}
             {currentComponent === "DeleteProduct" && <DeleteProduct />}
           </div>

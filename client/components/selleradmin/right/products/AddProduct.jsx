@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import CategoryOption from "./CategoryOption";
 import { Triangle } from "react-loader-spinner";
+import { Button } from "flowbite-react";
 
 function AddProduct({ value, UID }) {
   const [ctg, setCtg] = useState([]);
@@ -30,16 +31,17 @@ function AddProduct({ value, UID }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     // getting value from form
-    const Name = name.current.value;
-    const Description = description.current.value;
-    const Price = price.current.value;
-    const Stock = stock.current.value;
-    const Category = category.current.value;
-    const Img1 = img1.current.value;
-    const Img2 = img2.current.value;
-    const Img3 = img3.current.value;
-    const Img4 = img4.current.value;
-    const Img = [Img1, Img2, Img3, Img4];
+    let Name = name.current.value;
+    
+    let Description = description.current.value;
+    let Price = price.current.value;
+    let Stock = stock.current.value;
+    let Category = category.current.value;
+    let Img1 = img1.current.value;
+    let Img2 = img2.current.value;
+    let Img3 = img3.current.value;
+    let Img4 = img4.current.value;
+    let Img = [Img1, Img2, Img3, Img4];
 
     // seller shop name
     const shopname = value;
@@ -61,13 +63,22 @@ function AddProduct({ value, UID }) {
         if (res.data.message === "Product created successfully") {
           setLoading(false);
           setSuccessfullCreate(true);
-          setUpdateSuccessfully(false)
+          setUpdateSuccessfully(false);
         } else if (res.data.message === "Product update successfully") {
           setLoading(false);
           setUpdateSuccessfully(true);
-          setSuccessfullCreate(false)
-        } 
+          setSuccessfullCreate(false);
+        }
       });
+    // name.current.value = "";
+    // description.current.value = "";
+    // price.current.value = "";
+    // stock.current.value = "";
+    // category.current.value = "";
+    // img1.current.value = "";
+    // img2.current.value = "";
+    // img3.current.value = "";
+    // img4.current.value = "";
   };
 
   return (
@@ -157,35 +168,20 @@ function AddProduct({ value, UID }) {
           ref={img4}
           placeholder="image link four"
         />
-        <button
-          type="submit"
-          className="mt-4 pt-2 pb-2 bg-green-200 rounded-lg w-64"
-        >
-          {loading === true ? (
-            <Triangle
-              height="21"
-              width="21"
-              color="white"
-              ariaLabel="triangle-loading"
-              wrapperStyle={{}}
-              wrapperClassName=""
-              visible={true}
-            />
-          ) : (
-            <p>Add or update Product</p>
-          )}
-        </button>
+        <Button disabled={loading ? true : false} type="submit">
+          Add or update Product
+        </Button>
         <br />
         {successfullCreate === true ? (
           <p className="text-sm text-green-400 mb-2">
-            Product added successfully
+            Product added successfully refresh the page
           </p>
         ) : (
           ""
         )}
         {updateSuccessfully === true ? (
           <p className="text-sm text-green-400 mb-4">
-            Product update successfully
+            Product update successfully refresh the page
           </p>
         ) : (
           ""

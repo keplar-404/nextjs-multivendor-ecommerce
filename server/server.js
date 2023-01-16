@@ -3,7 +3,6 @@ import config from "./config/config";
 import mongoose from "mongoose";
 
 const { port, db_local } = config;
-
 mongoose
   .connect(db_local, {
     useNewUrlParser: true,

@@ -12,6 +12,7 @@ const addproduct = async (req, res, next) => {
     shopname,
     uid,
   } = req.body;
+  
 
   try {
     const sellerJson = await SellerModel.find({ uid: uid }).select(
