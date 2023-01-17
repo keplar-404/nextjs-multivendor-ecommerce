@@ -3,7 +3,7 @@ import pr from "../../../../public/img/pr.png";
 import { useRef, useState } from "react";
 import axios from "axios";
 
-function DeleteProduct({ value }) {
+function DeleteProduct({ value, updateCompnent }) {
   const name = useRef();
   const [product, setProduct] = useState(null);
   const [successfull, setsuccessfull] = useState(null);
@@ -38,7 +38,7 @@ function DeleteProduct({ value }) {
         Name: Name,
       })
       .then((data) => {
-        console.log(data.data)
+        // console.log(data.data)
         setsuccessfull(true)
         name.current.value = "";
       });
@@ -88,7 +88,7 @@ function DeleteProduct({ value }) {
             </button>
           </div>
         )}
-        {successfull ? <p>Product delete successfully</p> : ""}
+        {successfull ? <p className="text-red-600 text-xl text-center my-4">Product delete successfully</p> : ""}
         {unsuccess ? <p className="text-red-600 text-xl text-center">Product not found</p> : ""}
       </div>
     </>

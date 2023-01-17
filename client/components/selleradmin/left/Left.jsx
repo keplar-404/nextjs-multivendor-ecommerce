@@ -1,19 +1,22 @@
 import Image from "next/image";
 import profilePic from "../../../public/img/pr.png";
+import { auth } from "../../../firebase/Authentication";
+import { signOut } from "firebase/auth";
 
-function Left({ handler }) {
+function Left({ handler, user }) {
+  const { shopname, username } = user;
   return (
     <>
       <div className="w-full h-screen flex flex-col gap-y-4 justify-center items-center">
         <p>Logo</p>
-        <p>Shop name</p>
+        <p>Shop name : {shopname}</p>
         <Image
           src={profilePic}
           width={50}
           height={50}
           alt="image description"
         />
-        <p>seller</p>
+        <p>{username}</p>
 
         <button
           onClick={() => handler("Dashboard")}
@@ -51,7 +54,13 @@ function Left({ handler }) {
           Order
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
-        <button>Logout</button>
+        <button
+          onClick={() => {
+            signOut(auth).then(localStorage.removeItem("accesstoken"));
+          }}
+        >
+          Logout
+        </button>
       </div>
     </>
   );

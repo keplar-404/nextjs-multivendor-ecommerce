@@ -11,6 +11,7 @@ import findSellerProduct from "./products/findSellerProduct"
 import deleteSellerProduct from "./products/deleteSellerProduct"
 import deleteProduct from "./products/deleteProduct"
 import getUserController from "./auth/getUserController"
+import getAllUser from "./auth/getAllUser"
 import addcategory from "./products/addCatagorie"
 import getCategory from "./products/getCategory"
 
@@ -31,6 +32,7 @@ const allControllers = {
     deleteSellerProduct,
     deleteProduct,
     getUserController,
+    getAllUser,
     addcategory,
     getCategory
 }

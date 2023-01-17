@@ -3,7 +3,7 @@ import axios from "axios";
 import CategoryOption from "./CategoryOption";
 import { Button } from "flowbite-react";
 
-function AddProduct({ value, UID }) {
+function AddProduct({ value, UID, updateCompnent }) {
   const [ctg, setCtg] = useState([]);
   const [successfullCreate, setSuccessfullCreate] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -71,6 +71,8 @@ function AddProduct({ value, UID }) {
     img2.current.value = "";
     img3.current.value = "";
     img4.current.value = "";
+  updateCompnent.setUpdateSibling(updateCompnent.updateSibling + 1)
+
   };
 
   return (

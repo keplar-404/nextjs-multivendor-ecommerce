@@ -45,5 +45,5 @@ const adminSchema = mongoose.Schema({
   },
 });
 
-const SellerModel = mongoose.model("Admin", adminSchema);
-export default SellerModel;
+const AdminModel = mongoose.model("Admin", adminSchema);
+export default AdminModel;

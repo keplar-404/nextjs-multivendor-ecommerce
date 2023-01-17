@@ -1,5 +1,6 @@
 function Dashboard(props) {
 // console.log(props.value)
+
   const { totalearning, products, productpending } = props.value
  const totalProduct =  products.length
   return (
