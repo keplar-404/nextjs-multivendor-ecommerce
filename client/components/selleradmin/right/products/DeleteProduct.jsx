@@ -3,7 +3,7 @@ import pr from "../../../../public/img/pr.png";
 import { useRef, useState } from "react";
 import axios from "axios";
 
-function DeleteProduct({ value, updateCompnent }) {
+function DeleteProduct({ value }) {
   const name = useRef();
   const [product, setProduct] = useState(null);
   const [successfull, setsuccessfull] = useState(null);

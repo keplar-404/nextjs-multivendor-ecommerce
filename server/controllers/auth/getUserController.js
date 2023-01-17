@@ -23,6 +23,10 @@ const getUserController = async (req, res, next) => {
       res.status(200).json(customerArray);
     } else if (admin.includes(uid)){
       res.status(200).json(adminArray)
+    } else{
+      res.status(400).json({
+        message: "User not found"
+      })
     }
   } catch (err) {
     res.status(400).json({

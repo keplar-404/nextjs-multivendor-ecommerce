@@ -1,20 +1,26 @@
+import AdminModel from "../../models/adminModel/adminModel";
 import Products from "../../models/productsModel";
 
 const deleteProduct = async (req, res, next) => {
-  const { name } = req.body;
-  const trimedName = name.trim();
-  const Name = String(trimedName);
+  const { uid, Name, shopname } = req.body;
 
   try {
-   const deletedProduct = await Products.findOneAndDelete({ name: Name });
-   if (deletedProduct == null) {
-    res.status(400).json({
-        message: 'Product not found'
-    })
-    return
-   }
+    const admin = await AdminModel.find({ uid: uid }).select(
+      "-_id -role -totalearning -productpending -productdeliverd -delivertoadmin -order -ordercencle -username -email -uid  -__v -shopname"
+    );
+   await Products.findOneAndDelete({ name: Name, shopname: shopname });
+    const products = admin[0].products;
+    const filtered = products.filter((data) => data.name !== Name);
+
+    const result = await AdminModel.findOneAndUpdate(
+      { uid: uid },
+      { $set: { products: filtered } },
+      { new: true }
+    );
+
     res.status(200).json({
-      msg: "Product deleted successfully",
+      message: "Product delete successfully",
+      data: result,
     });
   } catch (err) {
     res.status(500).json({

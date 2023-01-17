@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import CategoryOption from "./CategoryOption";
+import CategoryOption from "./CatagoryOption";
 import { Button } from "flowbite-react";
 
 function AddProduct({ value, UID }) {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Left from "../components/admin/left/Left";
-import AddProduct from "../components/admin/right/AddProduct";
+import AddProduct from "../components/admin/right/Products/AddProduct";
 import Dashboard from "../components/admin/right/Dashboard";
-import DeleteProduct from "../components/admin/right/DeleteProduct";
+import DeleteProduct from "../components/admin/right/Products/DeleteProduct";
 import DeleverProduct from "../components/admin/right/DeleverProduct/DeleverProduct";
 import Products from "../components/admin/right/products/AllProducts";
 import AllSellers from "../components/admin/right/AllSellers/AllSellers";
@@ -67,8 +67,8 @@ function Admin() {
           </div>
           <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl h-fit flex justify-center">
             {currentComponent === "Dashboard" && <Dashboard value={user} value2={allUser} value3={AllProducts} />}
-            {currentComponent === "Products" && <Products />}
-            {currentComponent === "AddProduct" && <AddProduct />}
+            {currentComponent === "Products" && <Products value={AllProducts} value2={user.productdeliverd} />}
+            {currentComponent === "AddProduct" && <AddProduct UID={_uid} value={user.shopname} />}
             {currentComponent === "DeleteProduct" && <DeleteProduct />}
             {currentComponent === "DeleverProduct" && <DeleverProduct />}
             {currentComponent === "users" && <AllUsers />}

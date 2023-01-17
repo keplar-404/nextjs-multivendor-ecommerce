@@ -1,5 +1,6 @@
 function Dashboard({ value, value2, value3 }) {
   const { totalearning, products } = value;
+  // console.log(products.length)
   const { customer, seller, admin } = value2;
   // console.log(value3)
   const Customer = customer.length;
@@ -14,7 +15,7 @@ function Dashboard({ value, value2, value3 }) {
         <div>
           <p className="text-2xl">Overview</p>
         </div>
-        <div className="grid grid-cols-3 gap-8 bg-white rounded-xl mt-9">
+        <div className="grid grid-cols-4 gap-8 bg-white rounded-xl mt-9">
           <div className="text-center pt-7 pb-7">
             <p>Total Earning</p>
             <p>${totalearning}</p>
@@ -22,6 +23,10 @@ function Dashboard({ value, value2, value3 }) {
           <div className="text-center pt-7 pb-7">
             <p>Total Product</p>
             <p>{totalProducts}</p>
+          </div>
+          <div className="text-center pt-7 pb-7">
+            <p>My Product</p>
+            <p>{products.length}</p>
           </div>
           <div className="text-center pt-7 pb-7">
             <p>Total user</p>
