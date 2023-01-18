@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Left from "../components/admin/left/Left";
 import AddProduct from "../components/admin/right/Products/AddProduct";
 import Dashboard from "../components/admin/right/Dashboard";
-import DeleteProduct from "../components/admin/right/Products/DeleteProduct";
+import DeleteMyProduct from "../components/admin/right/Products/DeleteMyProduct";
+import DeleteSellerProduct from "../components/admin/right/Products/DeleteSellerProduct";
 import DeleverProduct from "../components/admin/right/DeleverProduct/DeleverProduct";
 import Products from "../components/admin/right/products/AllProducts";
 import AllSellers from "../components/admin/right/AllSellers/AllSellers";
@@ -65,11 +66,12 @@ function Admin() {
           <div className="w-1/4 h-full">
             <Left handler={handleState} />
           </div>
-          <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl h-fit flex justify-center">
+          <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl flex justify-center">
             {currentComponent === "Dashboard" && <Dashboard value={user} value2={allUser} value3={AllProducts} />}
             {currentComponent === "Products" && <Products value={AllProducts} value2={user.productdeliverd} />}
             {currentComponent === "AddProduct" && <AddProduct UID={_uid} value={user.shopname} />}
-            {currentComponent === "DeleteProduct" && <DeleteProduct />}
+            {currentComponent === "DeleteMyProduct" && <DeleteMyProduct value={user} />}
+            {currentComponent === "DeleteSellerProduct" && <DeleteSellerProduct />}
             {currentComponent === "DeleverProduct" && <DeleverProduct />}
             {currentComponent === "users" && <AllUsers />}
             {currentComponent === "sellers" && <AllSellers />}

@@ -38,10 +38,17 @@ function Left({ handler }) {
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
-          onClick={() => handler("DeleteProduct")}
+          onClick={() => handler("DeleteMyProduct")}
           className="group transition duration-600 opacity-50 hover:opacity-100"
         >
-          Delete Product
+          Delete my Product
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+        </button>
+        <button
+          onClick={() => handler("DeleteSellerProduct")}
+          className="group transition duration-600 opacity-50 hover:opacity-100"
+        >
+          Delete Seller Product
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
