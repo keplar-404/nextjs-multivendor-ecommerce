@@ -8,7 +8,7 @@ const deleteProduct = async (req, res, next) => {
     const admin = await AdminModel.find({ uid: uid }).select(
       "-_id -role -totalearning -productpending -productdeliverd -delivertoadmin -order -ordercencle -username -email -uid  -__v -shopname"
     );
-   await Products.findOneAndDelete({ name: Name, shopname: shopname });
+    await Products.findOneAndDelete({ name: Name, shopname: shopname });
     const products = admin[0].products;
     const filtered = products.filter((data) => data.name !== Name);
 

@@ -8,7 +8,7 @@ const deleteSellerProduct = async (req, res, next) => {
     const seller = await SellerModel.find({ uid: uid }).select(
       "-_id -role -totalearning -productpending -productdeliverd -delivertoadmin -order -ordercencle -username -email -uid  -__v -shopname"
     );
-   await Products.findOneAndDelete({ name: Name, shopname: shopname });
+    await Products.findOneAndDelete({ name: Name, shopname: shopname });
     const products = seller[0].products;
     const filtered = products.filter((data) => data.name !== Name);
 
