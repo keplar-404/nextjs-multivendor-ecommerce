@@ -2,9 +2,11 @@ import Image from "next/image";
 import profilePic from "../../../public/img/pr.png";
 import { auth } from "../../../firebase/Authentication";
 import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 
 function Left({ handler, user }) {
   const { shopname, username } = user;
+  const router = useRouter();
   return (
     <>
       <div className="w-full h-screen flex flex-col gap-y-4 justify-center items-center">
@@ -56,7 +58,10 @@ function Left({ handler, user }) {
         </button>
         <button
           onClick={() => {
-            signOut(auth).then(localStorage.removeItem("accesstoken"));
+            signOut(auth).then(() => {
+              localStorage.removeItem("accesstoken");
+              router.push("/login");
+            });
           }}
         >
           Logout

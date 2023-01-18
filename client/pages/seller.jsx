@@ -6,8 +6,10 @@ import DeleteProduct from "../components/selleradmin/right/products/DeleteProduc
 import Products from "../components/selleradmin/right/products/AllProducts";
 import Order from "../components/selleradmin/right/Order";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 function SellerAdmin() {
+  const router = useRouter();
   //useState hook
   const [currentComponent, setCurrentComponent] = useState("Dashboard");
   const [user, setUser] = useState(null);

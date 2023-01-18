@@ -63,18 +63,18 @@ function Admin() {
     return (
       <>
         <div className=" bg-slate-400 flex">
-          <div className="w-1/4 h-full">
+          <div className="w-1/4 h-fit overflow-y-auto">
             <Left handler={handleState} />
           </div>
-          <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl flex justify-center">
+          <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl flex justify-center overflow-y-auto">
             {currentComponent === "Dashboard" && <Dashboard value={user} value2={allUser} value3={AllProducts} />}
             {currentComponent === "Products" && <Products value={AllProducts} value2={user.productdeliverd} />}
             {currentComponent === "AddProduct" && <AddProduct UID={_uid} value={user.shopname} />}
             {currentComponent === "DeleteMyProduct" && <DeleteMyProduct value={user} />}
             {currentComponent === "DeleteSellerProduct" && <DeleteSellerProduct />}
             {currentComponent === "DeleverProduct" && <DeleverProduct />}
-            {currentComponent === "users" && <AllUsers />}
-            {currentComponent === "sellers" && <AllSellers />}
+            {currentComponent === "users" && <AllUsers value={allUser.customer} />}
+            {currentComponent === "sellers" && <AllSellers value={allUser.seller} />}
           </div>
         </div>
       </>

@@ -3,7 +3,7 @@ import Users from "./Users";
 import pr from "../../../../public/img/pr.png";
 import { useState } from "react";
 
-function AllUsers() {
+function AllUsers({ value }) {
 
   return (
     <>
@@ -11,8 +11,9 @@ function AllUsers() {
         <div>
           <p className="text-2xl">All Users</p>
         </div>
-        <div className="grid grid-cols-4 gap-8 bg-white rounded-xl mt-9">
-          <Users/>
+        <div className="grid grid-cols-6 gap-8 bg-white rounded-xl mt-9">
+          {value.map((data)=> <Users key={data._id} data={data}/>)}
+          
         </div>
       </div>
     </>

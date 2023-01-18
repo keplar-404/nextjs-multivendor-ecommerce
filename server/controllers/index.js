@@ -15,6 +15,8 @@ import getUserController from "./auth/getUserController"
 import getAllUser from "./auth/getAllUser"
 import addcategory from "./products/addCatagorie"
 import getCategory from "./products/getCategory"
+import deleteCustomer from "./auth/deleteCustomerController"
+import deleteSeller from "./auth/deleteSellerController"
 
 
 
@@ -36,7 +38,9 @@ const allControllers = {
     getUserController,
     getAllUser,
     addcategory,
-    getCategory
+    getCategory,
+    deleteCustomer,
+    deleteSeller
 }
 
 

@@ -48,7 +48,11 @@ function Login() {
           "accesstoken",
           JSON.stringify(userCrediential.user.uid)
         );
-        location.reload();
+        // console.log(userCrediential.user.displayName)
+        // location.reload();
+        if (userCrediential.user.displayName == "admin") router.push(`/${userCrediential.user.displayName}`)
+        if (userCrediential.user.displayName == "seller") router.push(`/${userCrediential.user.displayName}`)
+        
       })
       .catch((err) => {
         const error = err.message;
