@@ -1,7 +1,15 @@
+import Header from "../components/header/Header";
+import Carosel from "../components/mainSection/Carosel";
+import Services from "../components/mainSection/Services2";
 function Home() {
   return (
     <>
-      <p className="">Home page</p>
+    <div className="bg-slate-50">
+
+      <Header />
+      <Carosel/>
+      <Services/>
+    </div>
     </>
   );
 }
