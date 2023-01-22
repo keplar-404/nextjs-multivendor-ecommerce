@@ -4,7 +4,9 @@ import { data } from "../../dummy"
 function Right() {
     return ( 
         <>
-        {data.map((data)=> <AllProducts data={data}/>)}
+        <div className="grid grid-cols-4 gap-y-6">
+        <AllProducts/>
+        </div>
         
         </>
      );

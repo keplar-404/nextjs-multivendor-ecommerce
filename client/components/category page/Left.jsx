@@ -11,7 +11,7 @@ function Left() {
           <select
             name="category"
             id="category"
-            className="w-48 border-gray-300 rounded-md drop-shadow-sm border-1 focus:outline-none focus:ring focus:ring-slate-50"
+            className="w-48 border-gray-300 rounded-md cursor-pointer drop-shadow-sm border-1 focus:ring-0"
           >
             <option value="t-shirt">Category</option>
             <option value="t-shirt">All</option>
@@ -21,16 +21,102 @@ function Left() {
         <div>
           <label htmlFor="rating">Rating</label>
         </div>
-        <div className="flex gap-x-2">
-          <input type="checkbox" name="" id="" />
-          <Rating>
-            <Rating.Star />
-            <Rating.Star />
-            <Rating.Star />
-            <Rating.Star />
-            <Rating.Star />
-          </Rating>
-          <p>5.0</p>
+        <div className="">
+          {/* Rating filter */}
+          <div className="flex gap-x-2">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="mt-1 rounded cursor-pointer focus:ring-0"
+            />
+            <Rating>
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star />
+            </Rating>
+            <p>5.0</p>
+          </div>
+          <div className="flex gap-x-2">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="mt-1 rounded cursor-pointer focus:ring-0"
+            />
+            <Rating>
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star filled={false} />
+            </Rating>
+            <p>4.0</p>
+          </div>
+          <div className="flex gap-x-2">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="mt-1 rounded cursor-pointer focus:ring-0"
+            />
+            <Rating>
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star filled={false} />
+              <Rating.Star filled={false} />
+            </Rating>
+            <p>3.0</p>
+          </div>
+          <div className="flex gap-x-2">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="mt-1 rounded cursor-pointer focus:ring-0"
+            />
+            <Rating>
+              <Rating.Star />
+              <Rating.Star />
+              <Rating.Star filled={false} />
+              <Rating.Star filled={false} />
+              <Rating.Star filled={false} />
+            </Rating>
+            <p>2.0</p>
+          </div>
+          <div className="flex gap-x-2">
+            <input
+              type="checkbox"
+              name=""
+              id=""
+              className="mt-1 rounded cursor-pointer focus:ring-0"
+            />
+            <Rating>
+              <Rating.Star />
+              <Rating.Star filled={false} />
+              <Rating.Star filled={false} />
+              <Rating.Star filled={false} />
+              <Rating.Star filled={false} />
+            </Rating>
+            <p>1.0</p>
+          </div>
+        </div>
+        {/* sort */}
+        <div>
+            <div>
+            <p>Price</p>
+            <div className="flex gap-x-2">
+            <input type="checkbox" id="lowtohigh" className="mt-1 rounded cursor-pointer focus:ring-0"/>
+            <label htmlFor="lowtohigh">Low to high</label>
+            </div>
+            <div className="flex gap-x-2">
+            <input type="checkbox" id="hightolow" className="mt-1 rounded cursor-pointer focus:ring-0"/>
+            <label htmlFor="lowtohigh">Hight to low</label>
+            </div>
+            </div>
         </div>
       </form>
     </>
