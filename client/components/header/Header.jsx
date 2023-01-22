@@ -1,5 +1,5 @@
 import { Navbar, Avatar, Dropdown } from "flowbite-react";
-import { IoCart } from "react-icons/io";
+import Link from "next/link";
 
 function Header() {
   return (
@@ -13,7 +13,7 @@ function Header() {
               alt="Flowbite Logo"
             />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Flowbite
+              K.ecom
             </span>
           </Navbar.Brand>
           <div className="flex md:order-2">
@@ -39,17 +39,14 @@ function Header() {
                 </span>
               </Dropdown.Header>
               <Dropdown.Item>Dashboard</Dropdown.Item>
-              <Dropdown.Item>Settings</Dropdown.Item>
-              <Dropdown.Divider />
               <Dropdown.Item>Log out</Dropdown.Item>
             </Dropdown>
             <Navbar.Toggle />
           </div>
           <Navbar.Collapse>
-            <Navbar.Link href="/navbars">Home</Navbar.Link>
-            <Navbar.Link href="/category">Category</Navbar.Link>
-            <Navbar.Link href="/navbars">Contact</Navbar.Link>
-            <Navbar.Link href="/navbars">Hot sales</Navbar.Link>
+            <Navbar.Link><Link href={"/"}>Home</Link></Navbar.Link>
+            <Navbar.Link><Link href={"category"}>Category</Link></Navbar.Link>
+            <Navbar.Link><Link href={"contact"}>Contact</Link></Navbar.Link>
           </Navbar.Collapse>
         </Navbar>
       </div>
