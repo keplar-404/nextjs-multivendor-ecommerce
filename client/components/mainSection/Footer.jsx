@@ -8,7 +8,7 @@ function Footerc() {
         <>
         <Footer bgDark={true}>
   <div className="w-full">
-    <div className=" flex flex-row justify-center items-center w-full gap-x-80 mb-2 md:grid-cols-4">
+    <div className=" flex flex-row justify-center items-center w-full gap-x-80 mb-2 md:grid-cols-4 bg-slate-50">
       <div>
         <Footer.Title title="Company" />
         <Footer.LinkGroup col={true}>
