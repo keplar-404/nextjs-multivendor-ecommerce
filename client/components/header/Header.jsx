@@ -9,10 +9,10 @@ function Header() {
           <Navbar.Brand href="https://flowbite.com/">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
-              className="mr-3 h-6 sm:h-9"
+              className="h-6 mr-3 sm:h-9"
               alt="Flowbite Logo"
             />
-            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               Flowbite
             </span>
           </Navbar.Brand>
@@ -34,7 +34,7 @@ function Header() {
             >
               <Dropdown.Header>
                 <span className="block text-sm">Bonnie Green</span>
-                <span className="block truncate text-sm font-medium">
+                <span className="block text-sm font-medium truncate">
                   name@flowbite.com
                 </span>
               </Dropdown.Header>
@@ -47,7 +47,7 @@ function Header() {
           </div>
           <Navbar.Collapse>
             <Navbar.Link href="/navbars">Home</Navbar.Link>
-            <Navbar.Link href="/navbars">Category</Navbar.Link>
+            <Navbar.Link href="/category">Category</Navbar.Link>
             <Navbar.Link href="/navbars">Contact</Navbar.Link>
             <Navbar.Link href="/navbars">Hot sales</Navbar.Link>
           </Navbar.Collapse>
