@@ -1,6 +1,16 @@
-import { Dropdown, Rating } from "flowbite-react";
+import { Rating } from "flowbite-react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Options from "./CategoryOption";
 
 function Left() {
+  const [category, setCategory] = useState(null)
+  useEffect (() => {
+    axios.get('http://127.0.0.1:5000/products/getcategory').then((data)=> {
+    const allCategory =  data.data
+    setCategory(allCategory)
+    })  
+  })
   return (
     <>
       <form action="" className="flex flex-col gap-y-4">
@@ -13,9 +23,8 @@ function Left() {
             id="category"
             className="w-48 border-gray-300 rounded-md cursor-pointer drop-shadow-sm border-1 focus:ring-0"
           >
-            <option value="t-shirt">Category</option>
             <option value="t-shirt">All</option>
-            <option value="t-shirt">All</option>
+            {category? category.map((data)=><Options key={data._id} data={data.name}/> ):""}
           </select>
         </div>
         <div>

@@ -4,7 +4,7 @@ import { HiMail } from "react-icons/hi";
 function contact() {
   return (
     <>
-      <div className="container flex flex-col items-center justify-center w-full h-screen px-12 bg-slate-100">
+      <div className="container flex flex-col items-center justify-center w-full h-screen px-12 bg-slate-50">
         <p className="text-2xl text-center">Contact us</p>
 
         <div className="w-full">

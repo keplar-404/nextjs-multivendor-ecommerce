@@ -11,7 +11,7 @@ function Home() {
     <>
     <div className="bg-slate-50">
 
-      <Header />
+      {/* <Header /> */}
       <Carosel/>
       <Services/>
       <FeatureProducts/>

@@ -4,9 +4,9 @@ import Link from "next/link";
 function Header() {
   return (
     <>
-      <div className="container px-6">
+      <div className="container px-6 bg-slate-50">
         <Navbar fluid={true} rounded={true} className="bg-slate-50">
-          <Navbar.Brand href="https://flowbite.com/">
+          <Navbar.Brand href="/">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="h-6 mr-3 sm:h-9"
@@ -44,9 +44,9 @@ function Header() {
             <Navbar.Toggle />
           </div>
           <Navbar.Collapse>
-            <Navbar.Link><Link href={"/"}>Home</Link></Navbar.Link>
-            <Navbar.Link><Link href={"category"}>Category</Link></Navbar.Link>
-            <Navbar.Link><Link href={"contact"}>Contact</Link></Navbar.Link>
+            <Link href={"/"} className="hover:text-blue-600">Home</Link>
+            <Link href={"category"} className="hover:text-blue-600">Category</Link>
+            <Link href={"contact"} className="hover:text-blue-600">Contact</Link>
           </Navbar.Collapse>
         </Navbar>
       </div>
