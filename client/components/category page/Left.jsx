@@ -3,14 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Options from "./CategoryOption";
 
-function Left() {
-  const [category, setCategory] = useState(null)
-  useEffect (() => {
-    axios.get('http://127.0.0.1:5000/products/getcategory').then((data)=> {
-    const allCategory =  data.data
-    setCategory(allCategory)
-    })  
-  })
+function Left({ getCategory }) {
+  const [category, setCategory] = useState(null);
+  useEffect(() => {
+    axios.get("http://127.0.0.1:5000/products/getcategory").then((data) => {
+      const allCategory = data.data;
+      setCategory(allCategory);
+    });
+  });
   return (
     <>
       <form action="" className="flex flex-col gap-y-4">
@@ -22,9 +22,16 @@ function Left() {
             name="category"
             id="category"
             className="w-48 border-gray-300 rounded-md cursor-pointer drop-shadow-sm border-1 focus:ring-0"
-          >
-            <option value="t-shirt">All</option>
-            {category? category.map((data)=><Options key={data._id} data={data.name}/> ):""}
+          onChange={(e)=> getCategory(e.target.value)}>
+            <option value="all">All</option>
+            {category
+              ? category.map((data) => (
+                  <Options
+                    key={data._id}
+                    data={data.name}
+                  />
+                ))
+              : ""}
           </select>
         </div>
         <div>
@@ -115,17 +122,25 @@ function Left() {
         </div>
         {/* sort */}
         <div>
-            <div>
+          <div>
             <p>Price</p>
             <div className="flex gap-x-2">
-            <input type="checkbox" id="lowtohigh" className="mt-1 rounded cursor-pointer focus:ring-0"/>
-            <label htmlFor="lowtohigh">Low to high</label>
+              <input
+                type="checkbox"
+                id="lowtohigh"
+                className="mt-1 rounded cursor-pointer focus:ring-0"
+              />
+              <label htmlFor="lowtohigh">Low to high</label>
             </div>
             <div className="flex gap-x-2">
-            <input type="checkbox" id="hightolow" className="mt-1 rounded cursor-pointer focus:ring-0"/>
-            <label htmlFor="lowtohigh">Hight to low</label>
+              <input
+                type="checkbox"
+                id="hightolow"
+                className="mt-1 rounded cursor-pointer focus:ring-0"
+              />
+              <label htmlFor="lowtohigh">Hight to low</label>
             </div>
-            </div>
+          </div>
         </div>
       </form>
     </>
