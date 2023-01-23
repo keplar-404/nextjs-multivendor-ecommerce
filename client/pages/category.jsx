@@ -8,6 +8,7 @@ function category() {
   const [products, setProducts] = useState(null);
   const [search, setSearch] = useState("");
   const [getCategory, setGetCategory] = useState("all");
+  const [rating, setRating] = useState("");
   // console.log(typeof(search));
   // console.log(getCategory);
 
@@ -37,6 +38,33 @@ function category() {
   }
   // console.log(getItemByCategory)
 
+  // console.log(rating)
+  let _rating = [];
+  const handleRatingFilter = (e) => {
+    if (e.target.checked) {
+      // console.log("checked")
+      _rating.unshift(e.target.value);
+      // console.log(_rating);
+      // const filterItemByRating = _rating.map((e) => {
+      //   if (
+      //     e !==
+      //     getItemByCategory.map((d) => {
+      //       return d.rating.toString();
+      //     })
+      //   )
+      //     return "";
+      // });
+      // console.log(filterItemByRating)
+    }
+    else if (!e.target.checked) {
+      const filteredRatings = _rating.filter(
+        (data) => data !== Number(e.target.value)
+      );
+      _rating = filteredRatings;
+      // console.log(_rating)
+    }
+  };
+
   return (
     <>
       <div className="container w-full h-full px-14 bg-slate-50">
@@ -56,7 +84,10 @@ function category() {
               />
             </div>
             {/* left all filter */}
-            <Left getCategory={setGetCategory} />
+            <Left
+              getCategory={setGetCategory}
+              handleRatingFilter={handleRatingFilter}
+            />
           </div>
           <div className="w-4/5">
             <Right />

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Options from "./CategoryOption";
 
-function Left({ getCategory }) {
+function Left({ getCategory, handleRatingFilter }) {
   const [category, setCategory] = useState(null);
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/products/getcategory").then((data) => {
@@ -22,14 +22,12 @@ function Left({ getCategory }) {
             name="category"
             id="category"
             className="w-48 border-gray-300 rounded-md cursor-pointer drop-shadow-sm border-1 focus:ring-0"
-          onChange={(e)=> getCategory(e.target.value)}>
+            onChange={(e) => getCategory(e.target.value)}
+          >
             <option value="all">All</option>
             {category
               ? category.map((data) => (
-                  <Options
-                    key={data._id}
-                    data={data.name}
-                  />
+                  <Options key={data._id} data={data.name} />
                 ))
               : ""}
           </select>
@@ -45,6 +43,8 @@ function Left({ getCategory }) {
               name=""
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
+              value={5}
+              onClick={(e) => handleRatingFilter(e)}
             />
             <Rating>
               <Rating.Star />
@@ -61,6 +61,8 @@ function Left({ getCategory }) {
               name=""
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
+              value={4}
+              onClick={(e) => handleRatingFilter(e)}
             />
             <Rating>
               <Rating.Star />
@@ -77,6 +79,8 @@ function Left({ getCategory }) {
               name=""
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
+              value={3}
+              onClick={(e) => handleRatingFilter(e)}
             />
             <Rating>
               <Rating.Star />
@@ -93,6 +97,8 @@ function Left({ getCategory }) {
               name=""
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
+              value={2}
+              onClick={(e) => handleRatingFilter(e)}
             />
             <Rating>
               <Rating.Star />
@@ -109,6 +115,8 @@ function Left({ getCategory }) {
               name=""
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
+              value={1}
+              onClick={(e) => handleRatingFilter(e)}
             />
             <Rating>
               <Rating.Star />
