@@ -1,11 +1,12 @@
 import AllProducts from "./AllProduct";
-import { data } from "../../dummy"
 
-function Right() {
+function Right({ data }) {
+   
     return ( 
         <>
         <div className="grid grid-cols-4 gap-y-6">
-        <AllProducts/>
+            {data.map((data)=> <AllProducts key={data._id} data={data} /> )}
+        
         </div>
         
         </>

@@ -1,9 +1,9 @@
-import { Rating } from "flowbite-react";
+import { Rating, TextInput } from "flowbite-react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Options from "./CategoryOption";
 
-function Left({ getCategory, handleRatingFilter }) {
+function Left({ getCategory, setSearch, handleRating }) {
   const [category, setCategory] = useState(null);
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/products/getcategory").then((data) => {
@@ -11,9 +11,20 @@ function Left({ getCategory, handleRatingFilter }) {
       setCategory(allCategory);
     });
   });
+
   return (
     <>
       <form action="" className="flex flex-col gap-y-4">
+        {/* search */}
+        <div className="pb-5">
+          <TextInput
+            id="search"
+            type="text"
+            placeholder="search"
+            className="w-48"
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+          />
+        </div>
         <div>
           <label htmlFor="category">Sort by :</label>
         </div>
@@ -44,7 +55,7 @@ function Left({ getCategory, handleRatingFilter }) {
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
               value={5}
-              onClick={(e) => handleRatingFilter(e)}
+              onChange={(e) => handleRating(e)}
             />
             <Rating>
               <Rating.Star />
@@ -62,7 +73,7 @@ function Left({ getCategory, handleRatingFilter }) {
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
               value={4}
-              onClick={(e) => handleRatingFilter(e)}
+              onChange={(e) => handleRating(e)}
             />
             <Rating>
               <Rating.Star />
@@ -80,7 +91,7 @@ function Left({ getCategory, handleRatingFilter }) {
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
               value={3}
-              onClick={(e) => handleRatingFilter(e)}
+              onChange={(e) => handleRating(e)}
             />
             <Rating>
               <Rating.Star />
@@ -98,7 +109,7 @@ function Left({ getCategory, handleRatingFilter }) {
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
               value={2}
-              onClick={(e) => handleRatingFilter(e)}
+              onChange={(e) => handleRating(e)}
             />
             <Rating>
               <Rating.Star />
@@ -116,7 +127,7 @@ function Left({ getCategory, handleRatingFilter }) {
               id=""
               className="mt-1 rounded cursor-pointer focus:ring-0"
               value={1}
-              onClick={(e) => handleRatingFilter(e)}
+              onChange={(e) => handleRating(e)}
             />
             <Rating>
               <Rating.Star />
