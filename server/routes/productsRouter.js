@@ -12,6 +12,10 @@ const {
   addcategory,
   getCategory,
   findAdminProduct,
+  order,
+  orderDetails,
+  deleverToAdmin,
+  deleverToCustomer
 } = allControllers;
 
 //all router operation
@@ -31,4 +35,9 @@ router.put("/deletesellerproduct", deleteSellerProduct);
 router.post("/addcategory", addcategory);
 router.get("/getcategory", getCategory);
 
+// order router
+router.post('/order', order)
+router.get('/getallorder', orderDetails)
+router.post('/delevertoadmin', deleverToAdmin)
+router.post('/delevertocustomer', deleverToCustomer)
 export default router;

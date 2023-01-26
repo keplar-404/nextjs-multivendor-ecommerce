@@ -17,7 +17,10 @@ import addcategory from "./products/addCatagorie"
 import getCategory from "./products/getCategory"
 import deleteCustomer from "./auth/deleteCustomerController"
 import deleteSeller from "./auth/deleteSellerController"
-
+import order from "./products/orderController"
+import orderDetails from "./products/getOrderDetailsController"
+import deleverToAdmin from "./products/orderDeleverToAdmin"
+import deleverToCustomer from "./products/deleverToCustomer"
 
 
 
@@ -40,7 +43,11 @@ const allControllers = {
     addcategory,
     getCategory,
     deleteCustomer,
-    deleteSeller
+    deleteSeller,
+    order,
+    orderDetails,
+    deleverToAdmin,
+    deleverToCustomer
 }
 
 
