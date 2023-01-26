@@ -3,14 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Options from "./CategoryOption";
 
-function Left({ getCategory, setSearch, handleRating }) {
+function Left({ getCategory, setSearch, handleRating, handleSort }) {
   const [category, setCategory] = useState(null);
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/products/getcategory").then((data) => {
       const allCategory = data.data;
       setCategory(allCategory);
     });
-  });
+  },[]);
 
   return (
     <>
@@ -148,6 +148,8 @@ function Left({ getCategory, setSearch, handleRating }) {
                 type="checkbox"
                 id="lowtohigh"
                 className="mt-1 rounded cursor-pointer focus:ring-0"
+                value={"lowtohigh"}
+                onClick={(e)=> handleSort(e)}
               />
               <label htmlFor="lowtohigh">Low to high</label>
             </div>
@@ -156,6 +158,8 @@ function Left({ getCategory, setSearch, handleRating }) {
                 type="checkbox"
                 id="hightolow"
                 className="mt-1 rounded cursor-pointer focus:ring-0"
+                onClick={(e)=> handleSort(e)}
+                value={"hightolow"}
               />
               <label htmlFor="lowtohigh">Hight to low</label>
             </div>

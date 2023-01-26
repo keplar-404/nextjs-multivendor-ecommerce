@@ -1,7 +1,9 @@
 import { Navbar, Avatar, Dropdown } from "flowbite-react";
 import Link from "next/link";
 
-function Header() {
+function Header({ cart }) {
+  // const { cart, setCart } = useContext(CartContext);
+  // useEffect(()=)
   return (
     <>
       <div className="container px-6 bg-slate-50">
@@ -18,7 +20,9 @@ function Header() {
           </Navbar.Brand>
           <div className="flex md:order-2">
             <button className="mr-9">
-              cart <span>0</span>{" "}
+              <Link href={"/cartpage"}>
+              cart <span>{cart}</span>
+              </Link>
             </button>
 
             <Dropdown
@@ -44,9 +48,15 @@ function Header() {
             <Navbar.Toggle />
           </div>
           <Navbar.Collapse>
-            <Link href={"/"} className="hover:text-blue-600">Home</Link>
-            <Link href={"category"} className="hover:text-blue-600">Category</Link>
-            <Link href={"contact"} className="hover:text-blue-600">Contact</Link>
+            <Link href={"/"} className="hover:text-blue-600">
+              Home
+            </Link>
+            <Link href={"category"} className="hover:text-blue-600">
+              Category
+            </Link>
+            <Link href={"contact"} className="hover:text-blue-600">
+              Contact
+            </Link>
           </Navbar.Collapse>
         </Navbar>
       </div>
