@@ -7,6 +7,7 @@ export const CartContext = createContext();
 
 export default function App({ Component, pageProps }) {
   const [cartLength, setCartLength] = useState(0);
+  
   useEffect(() => {
     const old = JSON.parse(window.localStorage.getItem("cartDetails")) || [];
     setCartLength(old.length);

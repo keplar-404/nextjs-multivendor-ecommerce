@@ -2,17 +2,38 @@ import Cart from "../components/cart/cart";
 import { Button, Table } from "flowbite-react";
 import { useEffect, useState, useContext } from "react";
 import { CartContext } from "./_app";
+import { useRouter } from "next/router";
 
 let random = 0;
 let total = 0;
+
 function cartPage() {
+  const router = useRouter();
+
   const { setCartLength } = useContext(CartContext);
   const [cartDetails, setCartDetails] = useState(null);
 
   useEffect(() => {
-    const data = JSON.parse(window.localStorage.getItem("cartDetails")) || "";
+    const data = JSON.parse(window.localStorage.getItem("cartDetails")) || [];
+
     window.localStorage.setItem("totalprice", JSON.stringify(total));
+    window.localStorage.setItem("finalCartDetails", JSON.stringify(data));
+
     setCartDetails(data);
+
+    const i = JSON.parse(window.localStorage.getItem("finalCartDetails")) || "";
+
+    if (i !== "") {
+      const updatedQuentity = i.map((data) => {
+        data.stock = 1;
+        return data;
+      });
+      //  console.log(updatedQuentity)
+      window.localStorage.setItem(
+        "finalCartDetails",
+        JSON.stringify(updatedQuentity)
+      );
+    }
   }, []);
 
   // this will work when the deleteHandler function will call
@@ -24,11 +45,6 @@ function cartPage() {
       document.getElementById("p").innerHTML = oldTotalPrice;
     }
   }, [random]);
-
-  // confirm order handler
-  const confirmOrder = () => {
-    // kalke korbo
-  };
 
   if (cartDetails === null) {
     return (
@@ -96,17 +112,47 @@ function cartPage() {
   // delete cart handler
   const deleteHandler = (id, currentPrice) => {
     const filteredData = cartDetails.filter((data) => data._id !== id);
-    setCartDetails(filteredData);
+    const getFinalCartDetails = JSON.parse(
+      window.localStorage.getItem("finalCartDetails")
+    );
+    const filteredFinalCartDetails = getFinalCartDetails.filter(
+      (data) => data._id !== id
+    );
+
     window.localStorage.setItem("cartDetails", JSON.stringify(filteredData));
+    window.localStorage.setItem(
+      "finalCartDetails",
+      JSON.stringify(filteredData)
+    );
+    window.localStorage.setItem(
+      "finalCartDetails",
+      JSON.stringify(filteredFinalCartDetails)
+    );
+
+    setCartDetails(filteredData);
     setCartLength(filteredData.length);
 
     const oldTotalPrice =
       JSON.parse(window.localStorage.getItem("totalprice")) || 0;
     if (oldTotalPrice == 0) return;
-    const up = oldTotalPrice - currentPrice;
-    window.localStorage.setItem("totalprice", JSON.stringify(up));
-
+    const newTotalPrice = oldTotalPrice - currentPrice;
+    window.localStorage.setItem("totalprice", JSON.stringify(newTotalPrice));
+    // console.log(up)
     random = Math.random();
+  };
+
+  // confirm order handler
+  const checkout = () => {
+    window.localStorage.removeItem("totalprice");
+    window.localStorage.removeItem("cartDetails");
+
+    const finalCartDetails = JSON.parse(window.localStorage.getItem('finalCartDetails'))
+    const realFinalCartDetails = JSON.parse(window.localStorage.getItem('realFinalAllCartDetails')) || []
+    const newRealFinalCartDetails = [...realFinalCartDetails, ...finalCartDetails]
+    window.localStorage.setItem('realFinalAllCartDetails', JSON.stringify(newRealFinalCartDetails))
+    
+    setCartLength(0)
+    router.push("/checkout");
   };
   return (
     <>
@@ -138,13 +184,13 @@ function cartPage() {
           </p>
           <Button
             className="px-12"
-            onClick={confirmOrder}
+            onClick={checkout}
             disabled={cartDetails == "" ? true : false}
           >
             {cartDetails == "" ? (
               <p>You do not have any item to order</p>
             ) : (
-              "Confirm order"
+              "Checkout"
             )}
           </Button>
         </div>
