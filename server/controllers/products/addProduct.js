@@ -12,6 +12,7 @@ const addproduct = async (req, res, next) => {
     category,
     shopname,
     uid,
+    rating
   } = req.body;
 
   try {
@@ -39,6 +40,7 @@ const addproduct = async (req, res, next) => {
         stock: stock,
         category: category,
         shopname: shopname,
+        rating: rating
       });
       await newProduct.save();
       await AdminModel.findOneAndUpdate(

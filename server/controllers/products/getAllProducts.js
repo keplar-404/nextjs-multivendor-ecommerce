@@ -2,7 +2,7 @@ import Products from "../../models/productsModel"
 
 const getAllProducts = async(req, res, next) => {
     try {
-       const allProducts = await Products.find()
+       const allProducts = await Products.find().select('-__v')
        res.status(200).json({
         data: allProducts
        })
