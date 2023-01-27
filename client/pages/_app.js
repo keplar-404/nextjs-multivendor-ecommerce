@@ -6,10 +6,10 @@ import { useState, createContext, useEffect } from "react";
 export const CartContext = createContext();
 
 export default function App({ Component, pageProps }) {
-  const [cart, setCart] = useState(0);
+  const [cartLength, setCartLength] = useState(0);
   useEffect(() => {
     const old = JSON.parse(window.localStorage.getItem("cartDetails")) || [];
-    setCart(old.length);
+    setCartLength(old.length);
   }, []);
 
   const addToCartHandler = (data) => {
@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
       return;
     } else {
       const _new = [...old, data];
-      setCart(_new.length);
+      setCartLength(_new.length);
       window.localStorage.setItem("cartDetails", JSON.stringify(_new));
       // console.log(_new)
     }
@@ -26,8 +26,8 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Header cart={cart} />
-      <CartContext.Provider value={{ addToCartHandler }}>
+      <Header cart={cartLength} />
+      <CartContext.Provider value={{ addToCartHandler, setCartLength }}>
         <NextNProgress />
         <Component {...pageProps} />
       </CartContext.Provider>

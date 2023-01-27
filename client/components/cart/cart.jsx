@@ -1,15 +1,24 @@
 import { Table } from "flowbite-react";
 import Options from "./Options";
+import { useState } from "react";
 
-function Cart({ data }) {
-  const { images, name, category, stock, price } = data;
-
-    let optinsNumber = []
+function Cart({ data, deleteHandler, handleSubTotalPrice, }) {
+  const { images, name, category, stock, price, _id } = data;
+  const [currentPrice, setCurrentPrice] = useState(price);
+  
+  let optinsNumber = [];
   for (let i = 1; i <= stock; i++) {
-    optinsNumber.push(i)
+    optinsNumber.push(i);
   }
-
-
+  let _currentPrice = price
+  const priceBasedOnQuentity = (value) => {
+    // console.log(typeof(value));
+    const QuentityStrtoNum = Number(value);
+   _currentPrice = price * QuentityStrtoNum;
+    // console.log(currentPrice);
+    setCurrentPrice(_currentPrice);
+    handleSubTotalPrice(_id, _currentPrice);
+  };
   return (
     <>
       <Table.Body className="text-center divide-y">
@@ -25,19 +34,27 @@ function Cart({ data }) {
             {stock == 0 ? (
               <p>Out of stock</p>
             ) : (
-              <select name="Quentity" className="h-10 text-center rounded-lg">
-                {optinsNumber.map((data)=> <Options data={data}/>)}
+              <select
+                name="Quentity"
+                className="h-10 text-center rounded-lg"
+                onChange={(e) => {
+                  priceBasedOnQuentity(e.target.value);
+                }}
+              >
+                {optinsNumber.map((data) => (
+                  <Options key={data} data={data} />
+                ))}
               </select>
             )}
           </Table.Cell>
-          <Table.Cell>${price}</Table.Cell>
+          <Table.Cell>${currentPrice}</Table.Cell>
           <Table.Cell>
-            <a
-              href="/tables"
-              className="font-medium text-red-600 hover:underline dark:text-blue-500"
+            <button
+              className="font-medium text-red-600 dark:text-blue-500"
+              onClick={() => deleteHandler(data._id, currentPrice )}
             >
               Delete
-            </a>
+            </button>
           </Table.Cell>
         </Table.Row>
       </Table.Body>

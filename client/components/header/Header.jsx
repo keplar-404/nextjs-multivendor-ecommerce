@@ -1,5 +1,6 @@
 import { Navbar, Avatar, Dropdown } from "flowbite-react";
 import Link from "next/link";
+import { FaShoppingCart } from 'react-icons/fa';
 
 function Header({ cart }) {
   // const { cart, setCart } = useContext(CartContext);
@@ -20,8 +21,8 @@ function Header({ cart }) {
           </Navbar.Brand>
           <div className="flex md:order-2">
             <button className="mr-9">
-              <Link href={"/cartpage"}>
-              cart <span>{cart}</span>
+              <Link href={"/cartpage"} className="flex items-center justify-center gap-x-1">
+              <FaShoppingCart/><p>{cart}</p>
               </Link>
             </button>
 

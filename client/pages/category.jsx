@@ -18,7 +18,7 @@ function category() {
   const [getCategory, setGetCategory] = useState("all");
   // setting default of ratings array
   const [selectedRatings, setSelectedRatings] = useState([]);
-
+// setting default sort filter
   const [_sort, setSort] = useState("");
 
   // getting all products from backend
