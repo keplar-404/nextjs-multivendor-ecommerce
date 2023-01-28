@@ -6,8 +6,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
 export const CartContext = createContext();
+export const _Login = createContext()
 
 export default function App({ Component, pageProps }) {
+  const[logedin, setLogedin] = useState(false)
   const [cartLength, setCartLength] = useState(0);
   
   useEffect(() => {
@@ -29,10 +31,12 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Header cart={cartLength} />
+      <Header cart={cartLength} logedin ={logedin} />
       <CartContext.Provider value={{ addToCartHandler, setCartLength }}>
         <NextNProgress />
+        <_Login.Provider value={{ setLogedin }} >
         <Component {...pageProps} />
+        </_Login.Provider>
         <ToastContainer />
       </CartContext.Provider>
     </>

@@ -21,6 +21,7 @@ function category() {
 // setting default sort filter
   const [_sort, setSort] = useState("");
 
+
   // getting all products from backend
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/products/allproducts").then((data) => {

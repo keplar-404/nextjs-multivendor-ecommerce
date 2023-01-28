@@ -81,7 +81,7 @@ function SellerAdmin() {
             {currentComponent === "DeleteProduct" && (
               <DeleteProduct value={user} />
             )}
-            {currentComponent === "Order" && <Order />}
+            {currentComponent === "Order" && <Order shopname ={user.shopname} />}
           </div>
         </div>
       </>

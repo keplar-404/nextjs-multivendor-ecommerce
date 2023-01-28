@@ -5,10 +5,10 @@ import { auth } from "../../../firebase/Authentication";
 import { useRouter } from "next/router";
 
 function Left({ handler }) {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <>
-      <div className="w-full h-screen flex flex-col gap-y-4 justify-center items-center">
+      <div className="flex flex-col items-center justify-center w-full h-screen gap-y-4">
         <p>Logo</p>
         <p>Shop name</p>
         <Image
@@ -21,7 +21,7 @@ function Left({ handler }) {
 
         <button
           onClick={() => handler("Dashboard")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Dashboard
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
@@ -29,49 +29,49 @@ function Left({ handler }) {
 
         <button
           onClick={() => handler("Products")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Products
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("AddProduct")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Add Product
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("DeleteMyProduct")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Delete my Product
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("DeleteSellerProduct")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Delete Seller Product
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("DeleverProduct")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Delever product
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("users")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Users
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
           onClick={() => handler("sellers")}
-          className="group transition duration-600 opacity-50 hover:opacity-100"
+          className="transition opacity-50 group duration-600 hover:opacity-100"
         >
           Sellers
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
@@ -80,7 +80,8 @@ function Left({ handler }) {
           onClick={() => {
             signOut(auth).then(() => {
               localStorage.removeItem("accesstoken");
-              router.push("/login")
+              location.reload()
+              router.push("/login");
             });
           }}
         >

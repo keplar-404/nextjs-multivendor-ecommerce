@@ -1,39 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DetailsProduct from "./DetailsProduct";
-function DeleverProduct() {
-    const [state, setState] = useState(false)
-    const [details, setDetails] = useState(false)
-    return ( 
-        <>
-         <div className="w-11/12 pt-6 h-screen">
-          <div>
-            <p className="text-2xl">Delever Product</p>
-          </div>
-          <div className="grid grid-cols-6 gap-8 bg-white rounded-xl mt-9">
-            <div className="text-center pt-7 pb-7">
-              <p>User name</p>
-            </div>
-            <div className="text-center pt-7 pb-7">
-              <p>Email</p>
-            
-            </div>
-            <div className="text-center pt-7 pb-7">
-              <p>Products Quentity</p>
-            </div>
-            <div className="text-center pt-7 pb-7">
-              <p>Delever Method</p>
-            </div>
-            <div className="text-center pt-7 pb-7">
-              <button className="bg-slate-300 pr-3 pl-3 rounded-lg" onClick={() => setDetails(true)}>Details</button>
-            </div>
-            <div className="text-center pt-7 pb-7">
-              <button className="bg-slate-300 pr-3 pl-3 rounded-lg disabled:bg-green-400" disabled={state} onClick={() => setState(true)}>Delever</button>
-            </div>
+import axios from "axios";
+import OrderItem from "./OrderedItem";
+function DeleverProduct({ shopname }) {
+  const [orderItem, setOrderItem] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://127.0.0.1:5000/products/getallorder").then((data) => {
+      const allOrderedItem = data.data.data;
+      const realOrderedItem = allOrderedItem.filter(
+        (data) => data.delevered == false  
+      );
+      setOrderItem(realOrderedItem);
+      // console.log(realOrderedItem)
+    });
+  }, []);
+  return (
+    <>
+      <div className="w-11/12 h-screen pt-6">
+        <div>
+          <p className="text-2xl">Delever Product</p>
+        </div>
+        <div className="w-full bg-white rounded-xl mt-7 h-fit">
+          <div className="grid grid-cols-6 mt-3 text-center">
+            <p>Customer name</p>
+            <p>Product name</p>
+            <p>Quentity</p>
+            <p>Total Price</p>
+            <p>Order received at our warehouse</p>
+            <p>Delever to customer</p>
+
+            {/* data */}
+            {orderItem.map((data) => (
+              <OrderItem key={data._id} data={data} />
+            ))}
           </div>
         </div>
-        { details===true ? <DetailsProduct setDetails={setDetails}/> : ""}
-        </>
-     );
+      </div>
+    </>
+  );
 }
 
 export default DeleverProduct;

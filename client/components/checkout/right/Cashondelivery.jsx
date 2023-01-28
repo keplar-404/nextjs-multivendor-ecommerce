@@ -22,7 +22,8 @@ function Cashondelivery() {
         uid: accessToken,
       })
       .then((data) => {
-        const email = data.data[0].email;
+        // console.log(data.data[0])
+        const email = data.data.data[0].email;
 
         allItem.map((data) => {
           axios

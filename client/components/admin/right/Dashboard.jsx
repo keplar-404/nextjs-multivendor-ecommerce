@@ -5,6 +5,7 @@ import { Spinner } from "flowbite-react";
 function Dashboard({ value }) {
   let totalUser;
   let totalProducts;
+  let totalearning;
   const [fatchingDataComplete, setFatchingDataComplete] = useState(false);
 
   const gettingAllData = () => {
@@ -25,6 +26,20 @@ function Dashboard({ value }) {
         document.getElementById("totalProducts").innerText = totalProducts;
     });
 
+    axios.get("http://127.0.0.1:5000/products/getallorder").then((data) => {
+      const allOrderedItem = data.data.data;
+      const realOrderedItem = allOrderedItem.filter(
+        (data) => data.delevered == true && data.shopname == "admin"
+      );
+      totalearning = realOrderedItem.reduce(
+        (acc, currdentdata) => acc + currdentdata.price,
+        0
+      );
+      // console.log(totalearning)
+      if (document.getElementById("totalearning"))
+        document.getElementById("totalearning").innerText = totalearning;
+    });
+
     setFatchingDataComplete(true);
   };
 
@@ -32,15 +47,18 @@ function Dashboard({ value }) {
     gettingAllData();
   }, []);
 
-
   if (fatchingDataComplete === false) {
     return (
       <>
-       <div className="flex items-center justify-center w-full h-full text-3xl">
-        <Spinner color="purple" aria-label="Purple spinner example" size="xl" />
-      </div>
+        <div className="flex items-center justify-center w-full h-full text-3xl">
+          <Spinner
+            color="purple"
+            aria-label="Purple spinner example"
+            size="xl"
+          />
+        </div>
       </>
-    )
+    );
   }
 
   if (fatchingDataComplete === true) {
@@ -53,7 +71,7 @@ function Dashboard({ value }) {
           <div className="grid grid-cols-4 gap-8 bg-white rounded-xl mt-9">
             <div className="text-center pt-7 pb-7">
               <p>Total Earning</p>
-              <p>${value.totalearning}</p>
+              <p id="totalearning">${totalearning}</p>
             </div>
             <div className="text-center pt-7 pb-7">
               <p>Total Product</p>

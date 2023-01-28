@@ -1,12 +1,14 @@
 import { Label, TextInput, Button } from "flowbite-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { auth } from "../firebase/Authentication";
 import { Triangle } from "react-loader-spinner";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { _Login } from "./_app";
 
 function Login() {
+  const { setLogedin } = useContext(_Login)
   const email = useRef("");
   const password = useRef("");
 
@@ -51,10 +53,9 @@ function Login() {
         );
         // location.reload();
         if (userCrediential.user.displayName == "admin") router.push(`/admin`);
-        if (userCrediential.user.displayName == "seller")
-          router.push(`/seller`);
-        if (userCrediential.user.displayName === "user")
-          router.push(`/customer`);
+        if (userCrediential.user.displayName == "seller")router.push(`/seller`);
+        if (userCrediential.user.displayName === "user") router.push(`/customer`);
+        setLogedin(true)
       })
       .catch((err) => {
         const error = err.message;

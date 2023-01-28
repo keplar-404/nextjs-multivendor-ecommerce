@@ -1,10 +1,33 @@
 import { Navbar, Avatar, Dropdown } from "flowbite-react";
 import Link from "next/link";
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { auth } from "../../firebase/Authentication";
+import { signOut } from "firebase/auth";
 
-function Header({ cart }) {
-  // const { cart, setCart } = useContext(CartContext);
-  // useEffect(()=)
+function Header({ cart, logedin }) {
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    const accessToken =
+      JSON.parse(window.localStorage.getItem("accesstoken")) || "";
+
+    if (accessToken !== "") {
+      axios
+        .post("http://127.0.0.1:5000/getuser", {
+          uid: accessToken,
+        })
+        .then((data) => {
+          if (data.data.message === "User not found") return;
+          // setUserData(data.data.data[0]);
+          const usr = data.data.data[0];
+          setUserData(usr);
+          // console.log(userData)
+          // console.log(logedin)
+        });
+    }
+  }, [logedin]);
   return (
     <>
       <div className="container px-6 bg-slate-50">
@@ -21,31 +44,53 @@ function Header({ cart }) {
           </Navbar.Brand>
           <div className="flex md:order-2">
             <button className="mr-9">
-              <Link href={"/cartpage"} className="flex items-center justify-center gap-x-1">
-              <FaShoppingCart/><p>{cart}</p>
+              <Link
+                href={"/cartpage"}
+                className="flex items-center justify-center gap-x-1"
+              >
+                <FaShoppingCart />
+                <p>{cart}</p>
               </Link>
             </button>
 
-            <Dropdown
-              arrowIcon={false}
-              inline={true}
-              label={
-                <Avatar
-                  alt="User settings"
-                  img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                  rounded={true}
-                />
-              }
-            >
-              <Dropdown.Header>
-                <span className="block text-sm">Bonnie Green</span>
-                <span className="block text-sm font-medium truncate">
-                  name@flowbite.com
-                </span>
-              </Dropdown.Header>
-              <Dropdown.Item>Dashboard</Dropdown.Item>
-              <Dropdown.Item>Log out</Dropdown.Item>
-            </Dropdown>
+            {userData === "" ? (
+              <Link href="/login">Login</Link>
+            ) : (
+              <Dropdown
+                arrowIcon={false}
+                inline={true}
+                label={
+                  <Avatar
+                    alt="User settings"
+                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    rounded={true}
+                  />
+                }
+              >
+                <Dropdown.Header>
+                  <span className="block text-sm">{userData.username}</span>
+                  <span className="block text-sm font-medium truncate">
+                    {userData.email}
+                  </span>
+                </Dropdown.Header>
+                <Dropdown.Item>
+                  <Link href={`/${userData.role}`}>Dashboard</Link>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <button
+                    onClick={() => {
+                      signOut(auth).then(() => {
+                        localStorage.removeItem("accesstoken");
+                        location.reload();
+                      });
+                    }}
+                  >
+                    Log out
+                  </button>{" "}
+                </Dropdown.Item>
+              </Dropdown>
+            )}
+
             <Navbar.Toggle />
           </div>
           <Navbar.Collapse>
@@ -57,6 +102,9 @@ function Header({ cart }) {
             </Link>
             <Link href={"contact"} className="hover:text-blue-600">
               Contact
+            </Link>
+            <Link href={"/register"} className="hover:text-blue-600">
+              Register
             </Link>
           </Navbar.Collapse>
         </Navbar>

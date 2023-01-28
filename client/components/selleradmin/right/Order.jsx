@@ -1,24 +1,29 @@
-import { useState } from "react";
-function Order(props) {
-    const [state, setState] = useState(false)
+import { useState, useEffect } from "react";
+import axios from "axios";
+import OrderItem from "./AllorderItem";
+function Order({ shopname }) {
+  const [orderItem, setOrderItem] = useState([]);
+  useEffect(() => {
+    axios.get("http://127.0.0.1:5000/products/getallorder").then((data) => {
+      const allOrderedItem = data.data.data
+      const realOrderedItem = allOrderedItem.filter((data)=> data.shopname == shopname && data.delevertoadmin == false )
+      setOrderItem(realOrderedItem)
+      // console.log(realOrderedItem)
+      
+    });
+  }, []);
   return (
     <>
-      <div className="rounded-xl w-11/12 mt-7 bg-white  h-fit">
-        <div className="grid grid-cols-5 text-center mt-3">
+      <div className="w-11/12 bg-white rounded-xl mt-7 h-fit">
+        <div className="grid grid-cols-5 mt-3 text-center">
+          <p>Customer name</p>
+          <p>Product name</p>
+          <p>Quentity</p>
+          <p>Total Price</p>
+          <p></p>
 
-        <p>Customer name</p>
-        <p>Product name</p>
-        <p>Quentity</p>
-        <p>Total Price</p>
-        <p></p>
-
-
-        {/* data */}
-        <p className="my-5">hamid</p>
-        <p className="my-5">mobiile</p>
-        <p className="my-5">2</p>
-        <p className="my-5">$576</p>
-        <button className="my-5 cursor-pointer bg-slate-300 rounded-lg disabled:bg-green-400 w-40" disabled={state} onClick={() => setState(true)}>Delevet to admin</button>
+          {/* data */}
+          {orderItem.map((data)=> <OrderItem key={data._id} data={data}/>)}
         </div>
       </div>
     </>
