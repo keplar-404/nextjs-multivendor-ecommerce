@@ -33,6 +33,8 @@ const orderSchema = mongoose.Schema({
   },
   uid: String,
   address: String,
+  mobile: String,
+  nameofthecustomer: String
 });
 
 const OrderModel = mongoose.model("order", orderSchema);

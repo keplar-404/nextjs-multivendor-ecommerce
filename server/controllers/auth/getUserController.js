@@ -14,19 +14,28 @@ const getUserController = async (req, res, next) => {
     );
     const adminArray = await AdminModel.find({ uid: uid }).select("-_id -__v");
 
-    const admin = adminArray.toString()
+    const admin = adminArray.toString();
     const customer = customerArray.toString();
     const seller = sellerArray.toString();
     if (seller.includes(uid)) {
-      res.status(200).json(sellerArray);
+      res.status(200).json({
+        message: "seller",
+        data: sellerArray,
+      });
     } else if (customer.includes(uid)) {
-      res.status(200).json(customerArray);
-    } else if (admin.includes(uid)){
-      res.status(200).json(adminArray)
-    } else{
+      res.status(200).json({
+        message: "customer",
+        data: customerArray,
+      });
+    } else if (admin.includes(uid)) {
+      res.status(200).json({
+        message: "admin",
+        data: adminArray,
+      });
+    } else {
       res.status(400).json({
-        message: "User not found"
-      })
+        message: "User not found",
+      });
     }
   } catch (err) {
     res.status(400).json({

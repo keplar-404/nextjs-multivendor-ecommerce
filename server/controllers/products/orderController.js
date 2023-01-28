@@ -11,7 +11,9 @@ const order = async (req, res) => {
     shopname,
     uid,
     customeremail,
-    address
+    address,
+    mobile,
+    nameofthecustomer,
   } = req.body;
 
   try {
@@ -27,9 +29,11 @@ const order = async (req, res) => {
         quentity: quentity,
         category: category,
         shopname: shopname,
-        customeremail: customeremail,
         uid: uid,
-        address: address
+        customeremail: customeremail,
+        address: address,
+        mobile: mobile,
+        nameofthecustomer: nameofthecustomer,
       });
       await orderProduct.save();
       const updatedCustomerInformation = await CustomerModel.findOneAndUpdate(
