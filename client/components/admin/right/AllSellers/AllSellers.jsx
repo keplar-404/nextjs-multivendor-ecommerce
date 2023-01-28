@@ -1,29 +1,35 @@
-
 import Sellers from "./Sellers";
 import pr from "../../../../public/img/pr.png";
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function AllUsers({ value }) {
-
+function AllUsers() {
+  const [AllSellers, setAllSellers] = useState([]);
+  useEffect(() => {
+    axios.get("http://127.0.0.1:5000/getuser/getalluser").then((data) => {
+      const seller = data.data.seller;
+      setAllSellers(seller);
+    });
+  }, []);
   return (
     <>
-      <div className="w-fit pt-6 h-screen">
+      <div className="w-full pt-6">
         <div>
           <p className="text-2xl">All Sellers</p>
         </div>
-        <div className="grid gap-y-3 grid-cols-11 bg-white rounded-xl mt-9 text-center ">
+        <div className="grid w-full grid-cols-11 overflow-x-scroll text-xs text-center bg-white rounded-xl mt-9">
           <p></p>
           <p className="">Username</p>
-          <p className=" col-span-2">Email</p>
+          <p className="">Email</p>
           <p className="">Shopname</p>
           <p className="">Total products</p>
           <p className="">Products sold</p>
           <p className="">Total earning</p>
-          <p className="col-span-2"></p>
+          <p className="">Seller id</p>
+          <p>Edit</p>
+          <p>Delete</p>
           <p></p>
-          {value.map((data)=> <Sellers data={data}/>)}
-          
+          {AllSellers.map((data)=> <Sellers key={AllSellers._id} data={data}/>)}
         </div>
       </div>
     </>

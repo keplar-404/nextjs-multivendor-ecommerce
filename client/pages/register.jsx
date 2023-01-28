@@ -6,7 +6,7 @@ function Register() {
     const [form, setForm] = useState("Customer")
   return (
     <> 
-      <div className="text-xl bg-slate-200 h-screen w-screen flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center w-full h-screen text-xl bg-slate-200">
         <div>
           <p className="text-center">Register</p>
           <div className="grid grid-cols-2 gap-32 mt-6">

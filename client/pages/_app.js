@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import NextNProgress from "nextjs-progressbar";
 import Header from "../components/header/Header";
 import { useState, createContext, useEffect } from "react";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export const CartContext = createContext();
 
@@ -31,6 +33,7 @@ export default function App({ Component, pageProps }) {
       <CartContext.Provider value={{ addToCartHandler, setCartLength }}>
         <NextNProgress />
         <Component {...pageProps} />
+        <ToastContainer />
       </CartContext.Provider>
     </>
   );

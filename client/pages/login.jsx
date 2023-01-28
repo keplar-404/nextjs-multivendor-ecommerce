@@ -4,6 +4,7 @@ import { auth } from "../firebase/Authentication";
 import { Triangle } from "react-loader-spinner";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 function Login() {
   const email = useRef("");
@@ -48,11 +49,12 @@ function Login() {
           "accesstoken",
           JSON.stringify(userCrediential.user.uid)
         );
-        // console.log(userCrediential.user.displayName)
         // location.reload();
-        if (userCrediential.user.displayName == "admin") router.push(`/${userCrediential.user.displayName}`)
-        if (userCrediential.user.displayName == "seller") router.push(`/${userCrediential.user.displayName}`)
-        
+        if (userCrediential.user.displayName == "admin") router.push(`/admin`);
+        if (userCrediential.user.displayName == "seller")
+          router.push(`/seller`);
+        if (userCrediential.user.displayName === "user")
+          router.push(`/customer`);
       })
       .catch((err) => {
         const error = err.message;
@@ -74,10 +76,10 @@ function Login() {
   };
   return (
     <>
-      <div className="flex justify-center items-center h-screen w-full bg-slate-200">
+      <div className="flex items-center justify-center w-full h-screen bg-slate-200">
         <form className="flex flex-col gap-4 w-96" onSubmit={handleSubmit}>
           <div>
-            <div className="mb-2 block">
+            <div className="block mb-2">
               <Label htmlFor="email" value="Your email" />
             </div>
             <TextInput
@@ -98,7 +100,7 @@ function Login() {
           </div>
 
           <div>
-            <div className="mb-2 block">
+            <div className="block mb-2">
               <Label htmlFor="password" value="Your password" />
             </div>
             <TextInput
@@ -132,12 +134,12 @@ function Login() {
             )}
           </Button>
           {usrno === "no" ? (
-            <p className="text-base text-red-700 text-center">User not found</p>
+            <p className="text-base text-center text-red-700">User not found</p>
           ) : (
             ""
           )}
           {passwordno === "no" ? (
-            <p className="text-base text-red-700 text-center">
+            <p className="text-base text-center text-red-700">
               Password not matched
             </p>
           ) : (

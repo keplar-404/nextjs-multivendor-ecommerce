@@ -1,41 +1,77 @@
-function Dashboard({ value, value2, value3 }) {
-  const { totalearning, products } = value;
-  // console.log(products.length)
-  const { customer, seller, admin } = value2;
-  // console.log(value3)
-  const Customer = customer.length;
-  const Seller = seller.length;
-  const Admin = admin.length;
-  const totalProducts = value3.length;
-  const totalUser = Customer + Seller + Admin;
-  //  console.log(totalUser)
-  return (
-    <>
-      <div className="w-11/12 pt-6 h-screen ">
-        <div>
-          <p className="text-2xl">Overview</p>
-        </div>
-        <div className="grid grid-cols-4 gap-8 bg-white rounded-xl mt-9">
-          <div className="text-center pt-7 pb-7">
-            <p>Total Earning</p>
-            <p>${totalearning}</p>
-          </div>
-          <div className="text-center pt-7 pb-7">
-            <p>Total Product</p>
-            <p>{totalProducts}</p>
-          </div>
-          <div className="text-center pt-7 pb-7">
-            <p>My Product</p>
-            <p>{products.length}</p>
-          </div>
-          <div className="text-center pt-7 pb-7">
-            <p>Total user</p>
-            <p>{totalUser}</p>
-          </div>
-        </div>
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Spinner } from "flowbite-react";
+
+function Dashboard({ value }) {
+  let totalUser;
+  let totalProducts;
+  const [fatchingDataComplete, setFatchingDataComplete] = useState(false);
+
+  const gettingAllData = () => {
+    axios.get("http://127.0.0.1:5000/getuser/getalluser").then((data) => {
+      // console.log(data.data)
+      const customer = data.data.customer.length;
+      const seller = data.data.seller.length;
+      const admin = data.data.admin.length;
+      totalUser = customer + seller + admin;
+      // console.log(totalUser)
+
+      if (document.getElementById("totaluser"))
+        document.getElementById("totaluser").innerText = totalUser;
+    });
+    axios.get("http://127.0.0.1:5000/products/allproducts").then((data) => {
+      totalProducts = data.data.data.length;
+      if (document.getElementById("totalProducts"))
+        document.getElementById("totalProducts").innerText = totalProducts;
+    });
+
+    setFatchingDataComplete(true);
+  };
+
+  useEffect(() => {
+    gettingAllData();
+  }, []);
+
+
+  if (fatchingDataComplete === false) {
+    return (
+      <>
+       <div className="flex items-center justify-center w-full h-full text-3xl">
+        <Spinner color="purple" aria-label="Purple spinner example" size="xl" />
       </div>
-    </>
-  );
+      </>
+    )
+  }
+
+  if (fatchingDataComplete === true) {
+    return (
+      <>
+        <div className="w-11/12 h-screen pt-6 ">
+          <div>
+            <p className="text-2xl">Overview</p>
+          </div>
+          <div className="grid grid-cols-4 gap-8 bg-white rounded-xl mt-9">
+            <div className="text-center pt-7 pb-7">
+              <p>Total Earning</p>
+              <p>${value.totalearning}</p>
+            </div>
+            <div className="text-center pt-7 pb-7">
+              <p>Total Product</p>
+              <p id="totalProducts">{totalProducts}</p>
+            </div>
+            <div className="text-center pt-7 pb-7">
+              <p>My Product</p>
+              <p>{value.products.length}</p>
+            </div>
+            <div className="text-center pt-7 pb-7">
+              <p>Total user</p>
+              <p id="totaluser">{totalUser}</p>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 }
 
 export default Dashboard;

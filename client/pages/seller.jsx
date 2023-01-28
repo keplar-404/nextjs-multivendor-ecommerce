@@ -24,25 +24,32 @@ function SellerAdmin() {
         uid: UID,
       })
       .then((u) => {
-        setUser(u.data[0]);
+        if (u.data.message !== "seller") {
+          router.push("/login");
+          return;
+        }
+        setUser(u.data.data[0]);
         // console.log(user.shopname);
       });
-      axios.get("http://127.0.0.1:5000/products/allproducts").then((data)=>{
-        console.log(data)
-      })
+    axios.get("http://127.0.0.1:5000/products/allproducts").then((data) => {
+      // console.log(data);
+    });
   };
 
   // getting uid accesstoken for the local storage
   useEffect(() => {
     try {
-      const UID = localStorage.getItem("accesstoken");
+      const UID = localStorage.getItem("accesstoken") || "";
+      if (UID === "") {
+        router.push("/login");
+        return;
+      }
       // console.log(UID);
       getUser(UID);
     } catch (err) {
       console.log(err.message);
     }
   }, []);
-
 
   // handle submit function
   const handleState = (value) => {
@@ -51,18 +58,18 @@ function SellerAdmin() {
 
   if (user === null) {
     return (
-      <p className="flex justify-center items-center h-screen w-screen text-3xl">
+      <p className="flex items-center justify-center w-screen h-screen text-3xl">
         Loading
       </p>
     );
   } else if (user) {
     return (
       <>
-        <div className=" bg-slate-400 flex">
+        <div className="flex bg-slate-400">
           <div className="w-1/4 h-full">
             <Left handler={handleState} user={user} />
           </div>
-          <div className="bg-slate-200 w-3/4 rounded-tl-3xl rounded-bl-3xl flex justify-center">
+          <div className="flex justify-center w-3/4 bg-slate-200 rounded-tl-3xl rounded-bl-3xl">
             {currentComponent === "Dashboard" && <Dashboard value={user} />}
             {currentComponent === "Products" && <Products value={user} />}
             {currentComponent === "AddProduct" && (

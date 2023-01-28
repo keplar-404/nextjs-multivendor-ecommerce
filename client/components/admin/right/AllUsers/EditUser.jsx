@@ -3,8 +3,8 @@ import pr from "../../../../public/img/pr.png"
 function EditUser({ setEdit }) {
     return ( 
         <>
-         <div className="p-4 ml-96 mt-12 rounded-lg absolute flex flex-col justify-center items-center bg-slate-600">
-<Image src={pr} width={50} height={50}/>
+         <div className="absolute flex flex-col items-center justify-center p-4 mt-12 rounded-lg ml-96 bg-slate-600">
+<Image src={pr} width={50} height={50} alt="sjkl"/>
 <form action="" className="flex flex-col">
     <label htmlFor="username">
         Username
@@ -17,8 +17,8 @@ function EditUser({ setEdit }) {
 </form>
 <div className="flex gap-3">
 
-<button className="bg-red-500 pr-3 pl-3 rounded-lg mt-5" onClick={() => setEdit(false)}>Cencle</button>
-<button className="bg-green-400 pr-3 pl-3 rounded-lg mt-5" onClick={() => setEdit(false)}>Update</button>
+<button className="pl-3 pr-3 mt-5 bg-red-500 rounded-lg" onClick={() => setEdit(false)}>Cencle</button>
+<button className="pl-3 pr-3 mt-5 bg-green-400 rounded-lg" onClick={() => setEdit(false)}>Update</button>
 </div>
 
         </div>

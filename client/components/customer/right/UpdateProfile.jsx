@@ -25,8 +25,9 @@ function UpdateProfile() {
             </div>
             <TextInput id="password1" type="password" required={true} />
           </div>
-          <Button type="submit">Submit</Button>
+          <Button type="submit" disabled={true}>Submit</Button>
         </form>
+        <p>This updated feature will avaiable soon</p>
       </div>
     </>
   );

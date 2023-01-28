@@ -4,7 +4,7 @@ function Left({ data }) {
   if (data === "") {
     return (
       <>
-        <div className="overflow-y-scroll h-96">
+        <div className="overflow-y-scroll">
           <Table>
             <Table.Head>
               <Table.HeadCell>Product name</Table.HeadCell>
@@ -32,7 +32,7 @@ function Left({ data }) {
           </Table.Head>
           <Table.Body className="divide-y">
             {data.map((data) => (
-              <Product data={data} />
+              <Product key={data._id} data={data} />
             ))}
           </Table.Body>
         </Table>

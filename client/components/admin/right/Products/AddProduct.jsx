@@ -71,108 +71,112 @@ function AddProduct({ value, UID }) {
     img2.current.value = "";
     img3.current.value = "";
     img4.current.value = "";
-
   };
 
   return (
     <>
-      <form
-        className="flex flex-col gap-4 w-2/4 my-auto mt-4"
-        onSubmit={handleSubmit}
-      >
-        <label htmlFor="productname">Product Name</label>
-        <input
-          type="text"
-          id="productname"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={name}
-          required
-        />
-        <label htmlFor="description">Product description</label>
-        <input
-          type="text"
-          id="description"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={description}
-          required
-        />
+      <div className="flex flex-col items-center justify-center w-full">
+        <div>
+          {successfullCreate === true ? (
+            <p className="text-xl text-green-400">
+              Product added successfully refresh the page
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="flex flex-col items-center justify-center w-full">
+          <form
+            className="flex flex-col w-2/4 gap-4 my-auto mt-4"
+            onSubmit={handleSubmit}
+          >
+            <label htmlFor="productname">Product Name</label>
+            <input
+              type="text"
+              id="productname"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={name}
+              required
+            />
+            <label htmlFor="description">Product description</label>
+            <input
+              type="text"
+              id="description"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={description}
+              required
+            />
 
-        <label htmlFor="Price" className="">
-          Price
-        </label>
-        <input
-          type="text"
-          id="Price"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={price}
-          required
-        />
-        <label htmlFor="Stock" className="">
-          Stock
-        </label>
-        <input
-          type="text"
-          id="Stock"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={stock}
-          required
-        />
+            <label htmlFor="Price" className="">
+              Price
+            </label>
+            <input
+              type="text"
+              id="Price"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={price}
+              required
+            />
+            <label htmlFor="Stock" className="">
+              Stock
+            </label>
+            <input
+              type="text"
+              id="Stock"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={stock}
+              required
+            />
 
-        <select
-          id="catagories"
-          className="border-gray-300 rounded-lg"
-          ref={category}
-        >
-          {ctg !== []
-            ? ctg.map((data) => (
-                <CategoryOption key={data.name} data={data.name} />
-              ))
-            : ""}
-        </select>
+            <select
+              id="catagories"
+              className="border-gray-300 rounded-lg"
+              ref={category}
+            >
+              {ctg !== []
+                ? ctg.map((data) => (
+                    <CategoryOption key={data.name} data={data.name} />
+                  ))
+                : ""}
+            </select>
 
-        <label htmlFor="imges">Product images</label>
-        <input
-          type="text"
-          id="imges"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={img1}
-          placeholder="image link one"
-          required
-        />
-        <input
-          type="text"
-          id="imges"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={img2}
-          placeholder="image link two"
-          required
-        />
-        <input
-          type="text"
-          id="imges"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={img3}
-          placeholder="image link three"
-        />
-        <input
-          type="text"
-          id="imges"
-          className="rounded-lg border-gray-300 focus:ring-blue-500"
-          ref={img4}
-          placeholder="image link four"
-        />
-        <Button disabled={loading ? true : false} type="submit">
-          Add or update Product
-        </Button>
-        <br />
-        {successfullCreate === true ? (
-          <p className="text-xl  text-green-400 mb-10">
-            Product added successfully refresh the page
-          </p>
-        ) : (
-          ""
-        )}
-      </form>
+            <label htmlFor="imges">Product images</label>
+            <input
+              type="text"
+              id="imges"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={img1}
+              placeholder="image link one"
+              required
+            />
+            <input
+              type="text"
+              id="imges"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={img2}
+              placeholder="image link two"
+              required
+            />
+            <input
+              type="text"
+              id="imges"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={img3}
+              placeholder="image link three"
+            />
+            <input
+              type="text"
+              id="imges"
+              className="border-gray-300 rounded-lg focus:ring-blue-500"
+              ref={img4}
+              placeholder="image link four"
+            />
+            <Button disabled={loading ? true : false} type="submit">
+              Add or update Product
+            </Button>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

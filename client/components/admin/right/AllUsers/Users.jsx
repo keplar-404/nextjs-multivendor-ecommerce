@@ -29,9 +29,9 @@ function Users({ data }) {
   };
   return (
     <>
-      <Image src={pr} height={50} width={50} />
-      <p className="pt-3">{data.username}</p>
-      <p className="pt-3">{data.email}</p>
+      <Image src={pr} height={50} width={50} alt={"dfsd"} />
+      <p className="pt-3 overflow-x-scroll">{data.username}</p>
+      <p className="pt-3 overflow-x-scroll">{data.email}</p>
 
       <button onClick={deleteUser}>Delete</button>
 
@@ -39,7 +39,7 @@ function Users({ data }) {
       <button onClick={() => setEdit(true)}>Edit</button>
       {edit === true ? <EditUser setEdit={setEdit} /> : ""}
       {success ? (
-        <p className="text-green-400 flex justify-center items-center">
+        <p className="flex items-center justify-center text-green-400">
           Delete successfully
         </p>
       ) : (

@@ -27,16 +27,17 @@ function Users({ data }) {
   return (
     <>
       <Image src={pr} height={50} width={50} className="" />
-      <p className="pt-3 ">{data.username}</p>
-      <p className="pt-4  col-span-2">{data.email}</p>
+      <p className="pt-3 overflow-x-scroll">{data.username}</p>
+      <p className="pt-4 overflow-x-scroll">{data.email}</p>
       <p className="pt-3 ">{data.shopname}</p>
       <p className="pt-3 ">{data.products.length}</p>
       <p className="pt-3 ">{data.productdeliverd}</p>
       <p className="pt-3 ">{data.totalearning}</p>
+      <p className="pt-3 overflow-x-scroll">{data.uid}</p>
       <button onClick={() => setEdit(true)}>Edit</button>
       {edit === true ? <EditSeller setEdit={setEdit} /> : ""}
       <button onClick={deleteUser}>Delete</button>
-      {success ? <p className="text-green-400 flex justify-center items-center">Delete successfully</p> : (<p></p>)}
+      {success ? <p className="flex items-center justify-center text-green-400">Delete successfully</p> : (<p></p>)}
     </>
   );
 }

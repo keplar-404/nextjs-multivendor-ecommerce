@@ -9,7 +9,9 @@ function Product({ data }) {
         <p className="mt-3">{data.stock}</p>
         <p className="mt-3">{data.sold}</p>
         <p className="mt-3">{data.price}</p>
+        <p className="mt-3">{data.category}</p>
         <p className="mt-3">{data.rating}</p>
+        <p className="mt-3">{data.shopname}</p>
 
     </>
   );

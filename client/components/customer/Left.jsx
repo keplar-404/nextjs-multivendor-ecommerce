@@ -4,7 +4,9 @@ import { auth } from "../../firebase/Authentication";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 
-function Left({ setCurrentComponent }) {
+function Left({ setCurrentComponent, data }) {
+  // console.log(data)
+  const { username, } = data
   const router = useRouter();
   return (
     <>
@@ -15,7 +17,7 @@ function Left({ setCurrentComponent }) {
           height={50}
           alt="image description"
         />
-        <p>username</p>
+        <p>{username}</p>
 
         <button
           onClick={() => setCurrentComponent("Dashboard")}

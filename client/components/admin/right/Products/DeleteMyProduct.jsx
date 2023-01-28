@@ -12,13 +12,14 @@ function DeleteMyProduct({ value }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const Name = name.current.value.toString();
+    // console.log(value)
     axios
       .post("http://127.0.0.1:5000/products/findadminproduct", {
         name: Name,
         uid: value.uid,
       })
       .then((data) => {
-        // console.log(data.data.message)
+        console.log(data.message)
         if(data.data.message === "Product not found"){
           setUnsuccess(true)
           setsuccessfull(false)
@@ -55,13 +56,13 @@ function DeleteMyProduct({ value }) {
           <input
             type="text"
             id="productname"
-            className="rounded-lg border-gray-300 focus:ring-blue-500 w-64"
+            className="w-64 border-gray-300 rounded-lg focus:ring-blue-500"
             ref={name}
             required
           />
           <button
             type="submit"
-            className="mt-4 pt-2 pb-2 bg-green-200 rounded-lg w-64 disabled:cursor-wait"
+            className="w-64 pt-2 pb-2 mt-4 bg-green-200 rounded-lg disabled:cursor-wait"
           >
             check
           </button>
@@ -69,7 +70,7 @@ function DeleteMyProduct({ value }) {
 
         {product && (
           <div>
-            <div className="grid grid-cols-5 gap-3 pt-36 pb-6">
+            <div className="grid grid-cols-5 gap-3 pb-6 pt-36">
               <Image src={pr} width={50} height={50} />
               <Image src={pr} width={50} height={50} />
               <Image src={pr} width={50} height={50} />
@@ -82,15 +83,15 @@ function DeleteMyProduct({ value }) {
             <p>Stock : {product.stock}</p>
             <p>Category : {product.category}</p>
             <button
-              className="mt-4 pt-2 pb-2 bg-red-200 rounded-lg w-64"
+              className="w-64 pt-2 pb-2 mt-4 bg-red-200 rounded-lg"
               onClick={deleteProduct}
             >
               Delete
             </button>
           </div>
         )}
-        {successfull ? <p className="text-red-600 text-xl text-center my-4">Product delete successfully</p> : ""}
-        {unsuccess ? <p className="text-red-600 text-xl text-center">Product not found</p> : ""}
+        {successfull ? <p className="my-4 text-xl text-center text-red-600">Product delete successfully</p> : ""}
+        {unsuccess ? <p className="text-xl text-center text-red-600">Product not found</p> : ""}
       </div>
     </>
   );
