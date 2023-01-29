@@ -7,6 +7,7 @@ import Products from "../components/selleradmin/right/products/AllProducts";
 import Order from "../components/selleradmin/right/Order";
 import axios from "axios";
 import { useRouter } from "next/router";
+import UpdateProfile from "../components/customer/right/UpdateProfile";
 
 function SellerAdmin() {
   const router = useRouter();
@@ -82,6 +83,7 @@ function SellerAdmin() {
               <DeleteProduct value={user} />
             )}
             {currentComponent === "Order" && <Order shopname ={user.shopname} />}
+            {currentComponent === "UpdateProfile" && <UpdateProfile accesstoken={user.uid} />}
           </div>
         </div>
       </>

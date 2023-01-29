@@ -7,3 +7,4 @@ export { default as logout } from './logoutRouter'
 export { default as products } from './productsRouter'
 export { default as getuser } from './getUserRouter'
 export { default as deleteUser } from './deleteUserRouter'
+export { default as updateProfile } from "./updateProfileRouter"

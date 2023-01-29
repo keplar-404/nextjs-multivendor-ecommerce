@@ -51,7 +51,7 @@ function customer() {
         <div className="flex justify-center w-3/4 bg-slate-200 rounded-tl-3xl rounded-bl-3xl">
           {currentComponent === "Dashboard" && <Dashboard data={customer} />}
           {currentComponent === "Order" && <Order data={customer} />}
-          {currentComponent === "UpdateProfile" && <UpdateProfile />}
+          {currentComponent === "UpdateProfile" && <UpdateProfile accesstoken={accesstoken} />}
         </div>
       </div>
     </>

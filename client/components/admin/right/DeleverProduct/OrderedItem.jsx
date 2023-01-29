@@ -11,13 +11,11 @@ function OrderItem({ data }) {
         uid: data.uid,
       })
       .then(() => {
-        if (data.shopname == "admin") {
-          setState(true);
-        }
+        setState(true);
       });
   };
 
-  const handleDelevertoWarehouse  = () => {
+  const handleDelevertoWarehouse = () => {
     axios
       .post("http://127.0.0.1:5000/products/delevertoadmin", {
         _id: data._id,
@@ -26,7 +24,7 @@ function OrderItem({ data }) {
       .then(() => {
         setState2(true);
       });
-  }
+  };
   // console.log(data)
   return (
     <>
@@ -34,7 +32,7 @@ function OrderItem({ data }) {
       <p className="my-5">{data.name}</p>
       <p className="my-5">{data.quentity}</p>
       <p className="my-5">${data.price}</p>
-      {data.shopname == "admin" ? (
+      {data.shopname == "admin" && data.delevertoadmin == false ? (
         <button
           className="w-40 my-5 rounded-lg cursor-pointer bg-slate-300 disabled:bg-green-400"
           disabled={state2}

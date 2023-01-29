@@ -1,7 +1,13 @@
 import { Card, Rating } from "flowbite-react";
+import Link from "next/link";
 
 function AllProducts({ data, addToCartHandler }) {
-  const { images, name, category, stock, price } = data;
+  const { images, name, category, stock, price, rating, _id } = data;
+
+  const setProductId = (e) => {
+    e.preventDefault();
+    window.localStorage.setItem("product_id", JSON.stringify(_id));
+  };
 
   return (
     <>
@@ -10,37 +16,53 @@ function AllProducts({ data, addToCartHandler }) {
           imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
           imgSrc="https://flowbite.com/docs/images/blog/image-1.jpg"
         >
-          <a href="#">
-            <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
-              {name}
-            </h5>
-          </a>
-          <div className="mt-2.5 mb-5 flex items-center">
-            <Rating>
-              <Rating.Star />
-              <Rating.Star />
-              <Rating.Star />
-              <Rating.Star />
-              <Rating.Star />
-            </Rating>
-            <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:bg-blue-200 dark:text-blue-800">
-              5.0
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
-              ${data.price}
-            </span>
-            {stock == 0 ? (
-              <p>Out of stock</p>
-            ) : (
-              <button
-                onClick={() => addToCartHandler(data)}
-                className="px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
+            {name}
+          </h5>
+          <div>
+            <div className="mt-2.5 mb-5 flex items-center">
+              <Rating>
+                <Rating.Star />
+                <Rating.Star
+                  filled={rating == 2 || rating > 2 ? true : false}
+                />
+                <Rating.Star
+                  filled={rating == 3 || rating > 3 ? true : false}
+                />
+                <Rating.Star
+                  filled={rating == 4 || rating > 4 ? true : false}
+                />
+                <Rating.Star filled={rating == 5 ? true : false} />
+              </Rating>
+              <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:bg-blue-200 dark:text-blue-800">
+                {rating}
+              </span>
+            </div>
+            <div className="mb-1">
+              <span
+                className="text-base font-bold text-gray-900 cursor-pointer dark:text-white"
+                onClick={(e) => setProductId(e)}
               >
-                Add to cart
-              </button>
-            )}
+                <Link href="/product/[id]" as={`/product/${data._id}`}>
+                  Details
+                </Link>
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-xl font-bold text-gray-900 dark:text-white">
+                ${price}
+              </span>
+              {stock == 0 ? (
+                <p>Out of stock</p>
+              ) : (
+                <button
+                  onClick={() => addToCartHandler(data)}
+                  className="px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Add to cart
+                </button>
+              )}
+            </div>
           </div>
         </Card>
       </div>

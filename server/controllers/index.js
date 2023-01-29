@@ -21,6 +21,7 @@ import order from "./products/orderController"
 import orderDetails from "./products/getOrderDetailsController"
 import deleverToAdmin from "./products/orderDeleverToAdmin"
 import deleverToCustomer from "./products/deleverToCustomer"
+import updateProfile from "./auth/updateProfile"
 
 
 
@@ -47,7 +48,8 @@ const allControllers = {
     order,
     orderDetails,
     deleverToAdmin,
-    deleverToCustomer
+    deleverToCustomer,
+    updateProfile
 }
 
 

@@ -11,8 +11,9 @@ const adminSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  logo: {
+  profilepic: {
     type: String,
+    default: ""
   },
   uid: String,
   role: {

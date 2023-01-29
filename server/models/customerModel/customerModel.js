@@ -17,7 +17,8 @@ const customerSchema = mongoose.Schema({
     default:"user"
   },
   profilepic:{
-    type: String
+    type: String,
+    default: ""
   }
 });
 

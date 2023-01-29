@@ -30,7 +30,7 @@ const order = async (req, res) => {
     );
 
     const customerStr = customerArray.toString();
-    const sellerStr = customerArray.toString();
+    const sellerStr = sellerArray.toString();
     const adminStr = adminArray.toString();
 
     if (customerStr.includes(uid)) {

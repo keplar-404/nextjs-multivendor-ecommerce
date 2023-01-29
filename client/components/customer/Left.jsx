@@ -1,22 +1,24 @@
-import Image from "next/image";
-import profilePic from "../../public/img/pr.png";
+import _profilePic from "../../public/img/pr.png";
 import { auth } from "../../firebase/Authentication";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
+import { Avatar } from "flowbite-react";
 
+// 
 function Left({ setCurrentComponent, data }) {
   // console.log(data)
-  const { username, } = data
+  const { username, profilepic } = data;
+  
   const router = useRouter();
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full h-screen gap-y-4">
-        <Image
-          src={profilePic}
-          width={50}
-          height={50}
-          alt="image description"
-        />
+        {profilepic == "" ? (
+          <Avatar rounded={true} />
+        ) : (
+          <Avatar img={profilepic} alt="profile pic" rounded={true} size="lg"/>
+        )}
+
         <p>{username}</p>
 
         <button

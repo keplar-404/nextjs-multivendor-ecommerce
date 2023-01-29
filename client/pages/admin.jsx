@@ -11,11 +11,11 @@ import AllUsers from "../components/admin/right/AllUsers/AllUsers";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { Spinner } from "flowbite-react";
+import UpdateProfile from "../components/customer/right/UpdateProfile";
 
 let uid;
 
 function Admin() {
-
   const router = useRouter();
   const [currentComponent, setCurrentComponent] = useState("Dashboard");
   const [user, setUser] = useState(false);
@@ -66,7 +66,11 @@ function Admin() {
       <>
         <div className="flex bg-slate-400">
           <div className="w-1/4 overflow-y-auto h-fit">
-            <Left handler={handleState} />
+            <Left
+              handler={handleState}
+              data={UserData.profilepic}
+              username={UserData.username}
+            />
           </div>
           <div className="flex justify-center w-3/4 overflow-y-auto bg-slate-200 rounded-tl-3xl rounded-bl-3xl">
             {currentComponent === "Dashboard" && <Dashboard value={UserData} />}
@@ -82,9 +86,14 @@ function Admin() {
             {currentComponent === "DeleteSellerProduct" && (
               <DeleteSellerProduct />
             )}
-            {currentComponent === "DeleverProduct" && <DeleverProduct shopname={UserData.shopname} />}
+            {currentComponent === "DeleverProduct" && (
+              <DeleverProduct shopname={UserData.shopname} />
+            )}
             {currentComponent === "users" && <AllUsers />}
             {currentComponent === "sellers" && <AllSellers />}
+            {currentComponent === "UpdateProfile" && (
+              <UpdateProfile accesstoken={UserData.uid} />
+            )}
           </div>
         </div>
       </>

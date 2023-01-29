@@ -9,7 +9,7 @@ import Trustus from "../components/mainSection/UpcommingEvents6";
 function Home() {
   return (
     <>
-    <div className="bg-slate-50">
+    <div className="bg-slate-50 ">
 
       {/* <Header /> */}
       <Carosel/>

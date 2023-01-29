@@ -1,24 +1,22 @@
-import Image from "next/image";
-import profilePic from "../../../public/img/pr.png";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase/Authentication";
 import { useRouter } from "next/router";
+import { Avatar } from "flowbite-react";
 
-function Left({ handler }) {
+function Left({ handler, data, username }) {
+  // console.log(data)
   const router = useRouter();
   return (
     <>
       <div className="flex flex-col items-center justify-center w-full h-screen gap-y-4">
-        <p>Logo</p>
+        {data == "" ? (
+          <Avatar rounded={true} />
+        ) : (
+          <Avatar img={data} alt="profile pic" rounded={true} size="lg" />
+        )}
         <p>Shop name</p>
-        <Image
-          src={profilePic}
-          width={50}
-          height={50}
-          alt="image description"
-        />
         <p>Admin</p>
-
+        <p>Username: {username}</p>
         <button
           onClick={() => handler("Dashboard")}
           className="transition opacity-50 group duration-600 hover:opacity-100"
@@ -77,10 +75,17 @@ function Left({ handler }) {
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
+          onClick={() => handler("UpdateProfile")}
+          className="transition opacity-50 group duration-600 hover:opacity-100"
+        >
+          Update Profile
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+        </button>
+        <button
           onClick={() => {
             signOut(auth).then(() => {
               localStorage.removeItem("accesstoken");
-              location.reload()
+              location.reload();
               router.push("/login");
             });
           }}

@@ -28,6 +28,8 @@ function Header({ cart, logedin }) {
         });
     }
   }, [logedin]);
+
+
   return (
     <>
       <div className="container px-6 bg-slate-50">
@@ -37,7 +39,7 @@ function Header({ cart, logedin }) {
               src="https://flowbite.com/docs/images/logo.svg"
               className="h-6 mr-3 sm:h-9"
               alt="Flowbite Logo"
-            />
+              />
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
               K.ecom
             </span>
@@ -62,7 +64,7 @@ function Header({ cart, logedin }) {
                 label={
                   <Avatar
                     alt="User settings"
-                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                    img={userData.profilepic}
                     rounded={true}
                   />
                 }
@@ -97,14 +99,17 @@ function Header({ cart, logedin }) {
             <Link href={"/"} className="hover:text-blue-600">
               Home
             </Link>
-            <Link href={"category"} className="hover:text-blue-600">
+            <Link href={"/category"} className="hover:text-blue-600">
               Category
             </Link>
-            <Link href={"contact"} className="hover:text-blue-600">
+            <Link href={"/contact"} className="hover:text-blue-600">
               Contact
             </Link>
             <Link href={"/register"} className="hover:text-blue-600">
               Register
+            </Link>
+            <Link href={"/checkout"} className="hover:text-blue-600">
+              Checkout
             </Link>
           </Navbar.Collapse>
         </Navbar>
