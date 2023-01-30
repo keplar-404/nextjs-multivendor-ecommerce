@@ -1,6 +1,9 @@
 import Image from "next/image";
 import pr from "../../../../public/img/pr.png"
 function Product({ data }) {
+  const calRating = data.rating.reduce((acc, value)=> acc + value, 0) / data.rating.length
+  const rating = calRating.toFixed(1)
+  // console.log(rating)
   return (
     <>
       
@@ -10,7 +13,7 @@ function Product({ data }) {
         <p className="mt-3">{data.sold}</p>
         <p className="mt-3">{data.price}</p>
         <p className="mt-3">{data.category}</p>
-        <p className="mt-3">{data.rating}</p>
+        <p className="mt-3">{rating}</p>
         <p className="mt-3">{data.shopname}</p>
 
     </>

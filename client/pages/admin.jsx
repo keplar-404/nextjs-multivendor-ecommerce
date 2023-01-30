@@ -12,6 +12,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { Spinner } from "flowbite-react";
 import UpdateProfile from "../components/customer/right/UpdateProfile";
+import AddCategory from "../components/admin/right/Products/Addcategory";
 
 let uid;
 
@@ -79,6 +80,9 @@ function Admin() {
             )}
             {currentComponent === "AddProduct" && (
               <AddProduct UID={uid} value={UserData.shopname} />
+            )}
+            {currentComponent === "Addcategory" && (
+              <AddCategory />
             )}
             {currentComponent === "DeleteMyProduct" && (
               <DeleteMyProduct value={UserData} />

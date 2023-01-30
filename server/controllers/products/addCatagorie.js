@@ -6,7 +6,7 @@ const addcategory = async (req, res, next) => {
   );
   const st = exitsCategory.toString();
   if (st.includes(catagorie)) {
-    res.status(400).json({
+    res.status(200).json({
       message: "Category already exits",
       data: exitsCategory,
     });

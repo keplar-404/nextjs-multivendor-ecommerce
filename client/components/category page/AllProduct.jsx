@@ -3,6 +3,8 @@ import Link from "next/link";
 
 function AllProducts({ data, addToCartHandler }) {
   const { images, name, category, stock, price, rating, _id } = data;
+  const calcRating = rating.reduce((acc, value)=> acc + value, 0) / data.rating.length
+  const _rating = calcRating.toFixed(1)
 
   const setProductId = (e) => {
     e.preventDefault();
@@ -13,8 +15,8 @@ function AllProducts({ data, addToCartHandler }) {
     <>
       <div className="h-auto w-60">
         <Card
-          imgAlt="Apple Watch Series 7 in colors pink, silver, and black"
-          imgSrc="https://flowbite.com/docs/images/blog/image-1.jpg"
+          imgAlt={name}
+          imgSrc={images[0]}
         >
           <h5 className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
             {name}
@@ -24,18 +26,18 @@ function AllProducts({ data, addToCartHandler }) {
               <Rating>
                 <Rating.Star />
                 <Rating.Star
-                  filled={rating == 2 || rating > 2 ? true : false}
+                  filled={_rating == 2 || _rating > 2 ? true : false}
                 />
                 <Rating.Star
-                  filled={rating == 3 || rating > 3 ? true : false}
+                  filled={_rating == 3 || _rating > 3 ? true : false}
                 />
                 <Rating.Star
-                  filled={rating == 4 || rating > 4 ? true : false}
+                  filled={_rating == 4 || _rating > 4 ? true : false}
                 />
-                <Rating.Star filled={rating == 5 ? true : false} />
+                <Rating.Star filled={_rating == 5 ? true : false} />
               </Rating>
               <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:bg-blue-200 dark:text-blue-800">
-                {rating}
+                {_rating}
               </span>
             </div>
             <div className="mb-1">

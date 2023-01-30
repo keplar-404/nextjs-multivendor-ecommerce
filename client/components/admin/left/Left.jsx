@@ -40,6 +40,13 @@ function Left({ handler, data, username }) {
           <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
         </button>
         <button
+          onClick={() => handler("Addcategory")}
+          className="transition opacity-50 group duration-600 hover:opacity-100"
+        >
+          Add category
+          <p className="bg-black h-0.5 max-w-0 group-hover:max-w-full transition-all duration-700"></p>
+        </button>
+        <button
           onClick={() => handler("DeleteMyProduct")}
           className="transition opacity-50 group duration-600 hover:opacity-100"
         >

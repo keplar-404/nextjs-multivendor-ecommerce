@@ -2,6 +2,8 @@ import Image from "next/image";
 import pr from "../../../../public/img/pr.png";
 function Product(props) {
   const { images, name, stock, sold, price, rating } = props.value;
+  const calcRating = rating.reduce((acc, value)=> acc + value, 0) / rating.length
+  const _rating = calcRating.toFixed(1)
   return (
     <>
       <Image
@@ -15,7 +17,7 @@ function Product(props) {
       <p className="mt-3">{stock}</p>
       <p className="mt-3">{sold}</p>
       <p className="mt-3">{price}</p>
-      <p className="mt-3">{rating}</p>
+      <p className="mt-3">{_rating}</p>
       <p className="mt-3 cursor-pointer">Details</p>
     </>
   );

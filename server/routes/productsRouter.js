@@ -15,7 +15,8 @@ const {
   order,
   orderDetails,
   deleverToAdmin,
-  deleverToCustomer
+  deleverToCustomer,
+  ratingController
 } = allControllers;
 
 //all router operation
@@ -40,4 +41,9 @@ router.post('/order', order)
 router.get('/getallorder', orderDetails)
 router.post('/delevertoadmin', deleverToAdmin)
 router.post('/delevertocustomer', deleverToCustomer)
+
+
+// rating controller
+router.post('/rating', ratingController)
+
 export default router;

@@ -2,12 +2,22 @@ import { Button, Label, TextInput } from "flowbite-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 function Cashondelivery() {
   const router = useRouter();
   let nameofthecustomer;
   let address;
   let mobile;
+
+  const [loginUsr, setLoginUsr] = useState(false);
+
+  useEffect(() => {
+    const acc = JSON.parse(window.localStorage.getItem("accesstoken")) || "";
+    if (acc !== "") {
+      setLoginUsr(true);
+    }
+  }, []);
 
   const handleOrder = (e) => {
     e.preventDefault();
@@ -98,9 +108,15 @@ function Cashondelivery() {
           />
         </div>
 
-        <Button type="submit" onClick={(e) => handleOrder(e)}>
-          Place order
-        </Button>
+        {loginUsr === true ? (
+          <Button type="submit" onClick={(e) => handleOrder(e)}>
+            Place order
+          </Button>
+        ) : (
+          <Button type="submit" disabled={true}>
+            You are not login please login first
+          </Button>
+        )}
       </form>
     </>
   );

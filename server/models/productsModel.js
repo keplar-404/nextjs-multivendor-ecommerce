@@ -22,8 +22,8 @@ const productsSchema = mongoose.Schema({
     default: 0,
   },
   rating: {
-    type: String,
-    default: 1,
+    type: Array,
+    default: [1],
   },
   stock: {
     type: Number,
