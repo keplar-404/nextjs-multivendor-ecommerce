@@ -1,13 +1,14 @@
 
 # multi vendor E-commerce
 
-This is a multi vendor e-commerce website based on nextjs, express, firebase, mongodb
-
+This is a multi vendor e-commerce website based on nextjs, express, firebase, mongodb, tailwind css. 
 
 
 ## Demo
+!!! This is not a responsive web site so visit this site form a larger screen like from desktop or tablet
 
 https://k-ecom-f.vercel.app/
+
 ## Authors
 
 - [@keplar-404](https://github.com/keplar-404)
