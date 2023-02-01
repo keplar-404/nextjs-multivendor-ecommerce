@@ -49,7 +49,7 @@ This will run your dev server in your local machine
 
 ## Environment Variables
 
-- Firebase
+- Firebase - 
 Although the firebase Environment Variables included in this project but you can add your own Variables in clien/firebase/Authentication.js file
 
 - Backend 
