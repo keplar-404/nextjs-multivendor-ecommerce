@@ -7,6 +7,7 @@ import axios from "axios";
 let totalProducts;
 function Products({ value }) {
 const [allproducts, setAllProducts] = useState([])
+const [deleverdOrder, setDeleveredOrder] = useState(0)
  
 useEffect (()=> {
   axios.get("http://127.0.0.1:5000/products/allproducts").then((data) => {
@@ -15,6 +16,13 @@ useEffect (()=> {
     if (document.getElementById("totalProducts"))
       document.getElementById("totalProducts").innerText = totalProducts;
   });
+  axios.get('http://127.0.0.1:5000/products/getallorder').then((data)=> {
+    const _data = data.data.data
+    const orderDelever = _data.filter((data)=> data.delevered == true)
+    const quentity = orderDelever.reduce((acc, val)=> acc + val.quentity, 0)
+    // console.log(quentity)
+    setDeleveredOrder(quentity)
+  })
 },[])
   return (
     <>
@@ -29,14 +37,13 @@ useEffect (()=> {
           </div>
           <div className="text-center pt-7 pb-7">
             <p>Products delevered</p>
-            <p>{value}</p>
+            <p>{deleverdOrder}</p>
           </div>
         </div>
-        <div className="grid grid-cols-8 pt-4 pb-4 text-center bg-white rounded-xl mt-7 ">
+        <div className="grid grid-cols-7 pt-4 pb-4 text-center bg-white rounded-xl mt-7 ">
           <p></p>
           <p>Product</p>
           <p>Instock</p>
-          <p>Sold</p>
           <p>Price</p>
           <p>category</p>
           <p>Rating</p>

@@ -10,7 +10,6 @@ function Product({ data }) {
         <Image src={pr} alt="jsdkl" width={50} height={50} className="w-10 mx-auto"/>
         <p className="mt-3">{data.name}</p>
         <p className="mt-3">{data.stock}</p>
-        <p className="mt-3">{data.sold}</p>
         <p className="mt-3">{data.price}</p>
         <p className="mt-3">{data.category}</p>
         <p className="mt-3">{rating}</p>

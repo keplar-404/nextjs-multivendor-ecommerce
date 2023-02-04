@@ -18,7 +18,6 @@ function Product(props) {
       <p className="mt-3">{sold}</p>
       <p className="mt-3">{price}</p>
       <p className="mt-3">{_rating}</p>
-      <p className="mt-3 cursor-pointer">Details</p>
     </>
   );
 }
