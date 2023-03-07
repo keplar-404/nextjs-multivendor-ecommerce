@@ -2,6 +2,7 @@ import OrderModel from "../../models/order";
 import CustomerModel from "../../models/customerModel/customerModel";
 import SellerModel from "../../models/sellerModel/sellerModel";
 import AdminModel from "../../models/adminModel/adminModel";
+import Products from "../../models/productsModel";
 
 const order = async (req, res) => {
   const {
@@ -18,7 +19,32 @@ const order = async (req, res) => {
     nameofthecustomer,
   } = req.body;
 
+  const stockNum = Number(quentity);
   try {
+    const orderProduct = await new OrderModel({
+      name: name,
+      images: images,
+      price: price,
+      quentity: quentity,
+      category: category,
+      shopname: shopname,
+      uid: uid,
+      customeremail: customeremail,
+      address: address,
+      mobile: mobile,
+      nameofthecustomer: nameofthecustomer,
+    });
+    await orderProduct.save();
+
+    const item = await Products.find({name: name})
+    const updateStock = item[0].stock - stockNum
+
+   await Products.findOneAndUpdate(
+      { name: name },
+      { $set: { stock: updateStock } },
+      { new: true }
+    );
+
     const customerArray = await CustomerModel.find({ uid: uid }).select(
       "-v -_id -role -username -email"
     );
@@ -34,20 +60,6 @@ const order = async (req, res) => {
     const adminStr = adminArray.toString();
 
     if (customerStr.includes(uid)) {
-      const orderProduct = await new OrderModel({
-        name: name,
-        images: images,
-        price: price,
-        quentity: quentity,
-        category: category,
-        shopname: shopname,
-        uid: uid,
-        customeremail: customeremail,
-        address: address,
-        mobile: mobile,
-        nameofthecustomer: nameofthecustomer,
-      });
-      await orderProduct.save();
       const updatedCustomerInformation = await CustomerModel.findOneAndUpdate(
         { uid: uid },
         { $push: { order: orderProduct } },
@@ -58,20 +70,6 @@ const order = async (req, res) => {
         data: updatedCustomerInformation,
       });
     } else if (sellerStr.includes(uid)) {
-      const orderProduct = await new OrderModel({
-        name: name,
-        images: images,
-        price: price,
-        quentity: quentity,
-        category: category,
-        shopname: shopname,
-        uid: uid,
-        customeremail: customeremail,
-        address: address,
-        mobile: mobile,
-        nameofthecustomer: nameofthecustomer,
-      });
-      await orderProduct.save();
       const updatedCustomerInformation = await SellerModel.findOneAndUpdate(
         { uid: uid },
         { $push: { order: orderProduct } },
@@ -82,20 +80,6 @@ const order = async (req, res) => {
         data: updatedCustomerInformation,
       });
     } else if (adminStr.includes(uid)) {
-      const orderProduct = await new OrderModel({
-        name: name,
-        images: images,
-        price: price,
-        quentity: quentity,
-        category: category,
-        shopname: shopname,
-        uid: uid,
-        customeremail: customeremail,
-        address: address,
-        mobile: mobile,
-        nameofthecustomer: nameofthecustomer,
-      });
-      await orderProduct.save();
       const updatedCustomerInformation = await AdminModel.findOneAndUpdate(
         { uid: uid },
         { $push: { order: orderProduct } },

@@ -18,9 +18,8 @@ function category() {
   const [getCategory, setGetCategory] = useState("all");
   // setting default of ratings array
   const [selectedRatings, setSelectedRatings] = useState([]);
-// setting default sort filter
+  // setting default sort filter
   const [_sort, setSort] = useState("");
-
 
   // getting all products from backend
   useEffect(() => {
@@ -44,7 +43,11 @@ function category() {
   const t = () => {
     if (selectedRatings.length) {
       const rafR = getItemByCategory.filter((p) =>
-        selectedRatings.includes(Math.floor(p.rating))
+        selectedRatings.includes(
+          Math.floor(
+            p.rating.reduce((acc, value) => acc + value, 0) / p.rating.length
+          )
+        )
       );
       if (_sort == "lowtohigh") {
         const sortResult = rafR.sort((a, b) => a.price - b.price);
@@ -117,9 +120,6 @@ function category() {
   };
   // console.log(sort)
 
-
-
-
   return (
     <>
       <div className="container w-full h-full px-14 bg-slate-50">
@@ -137,8 +137,10 @@ function category() {
             />
           </div>
           <div className="w-4/5">
-            <Right data={finalResult} itemsPerPage={8} 
-            addToCartHandler={addToCartHandler} 
+            <Right
+              data={finalResult}
+              itemsPerPage={8}
+              addToCartHandler={addToCartHandler}
             />
           </div>
         </div>
